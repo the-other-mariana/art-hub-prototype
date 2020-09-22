@@ -87,6 +87,7 @@ router.post('/register/submit-account', function(req, res, next){
       db.collection('user-data').insertOne(item, function(err, result){
         userID = (result.insertedId).toString();
         objectID = result.insertedId;
+
         console.log('Item inserted, id:' + (result.insertedId).toString());
 
       });
@@ -139,10 +140,6 @@ router.post('/login', function(req, res, next){
 
 
 
-});
-
-router.get('/users', function(req, res, next) {
-  res.send('respond with a resource');
 });
 
 module.exports = router;
