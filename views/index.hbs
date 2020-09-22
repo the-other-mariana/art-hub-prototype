@@ -1,7 +1,15 @@
-<h1>{{ title }}</h1>
 {{# if success }}
-  <section class="success">
-    <h2>Sucessful validation!</h2>
+  <section>
+    <div class="row panel panel-success">
+
+      <div class="panel-heading"><h4>Hello, {{ user }}</h4></div>
+      <div class="panel-body">
+        <form>
+          <button type = "submit" formaction="/additem" formmethod="post">Add Item</button>
+        </form>
+      </div>
+
+    </div>
   </section>
 {{else}}
   {{# if errors}}
@@ -13,20 +21,24 @@
       </ul>
     </section>
   {{/if}}
-  <form action = "/submit" method = "post">
-    <div class = "input">
-      <label for = "email" style = "display: block;"> E-mail </label>
-      <input type = "text" id = "email" name = "email">
-    </div>
-    <div class = "input">
-      <label for = "password" style = "display: block;"> Password </label>
-      <input type = "password" id = "password" name = "password">
-    </div>
-    <div class = "input">
-      <label for = "confirmPassword" style = "display: block;"> Confirm Password </label>
-      <input type = "password" id = "confirmPassword" name = "confirmPassword">
-    </div>
-    <button type = "submit">Sign up</button>
-  </form>
+  <div class="row panel panel-default">
+
+      <div class="panel-heading">Log in with your account: </div>
+      <div class="panel-body">
+        <form>
+          <div class = "input">
+            <label for = "loginusername" style = "display: block;"> Username: </label>
+            <input type = "text" id = "loginusername" name = "loginusername">
+          </div>
+          <div class = "input">
+            <label for = "loginpassword" style = "display: block;"> Password: </label>
+            <input type = "password" id = "loginpassword" name = "loginpassword">
+          </div>
+          <button type = "submit" formaction="/login" formmethod="post">Log In</button>
+          <button type = "submit" formaction="/register" formmethod="post">Register</button>
+          <button type = "submit" formaction="/restart-db" formmethod="post">Restart DB</button>
+        </form>
+      </div>
+  </div>
 {{/if}}
 
