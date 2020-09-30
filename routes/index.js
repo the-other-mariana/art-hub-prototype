@@ -5,11 +5,11 @@ const url = 'mongodb://localhost:27017/arthubdb';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Art Hub', success: req.session.success, errors: req.session.errors, user: req.session.user });
+  res.render('index', { title: 'Bohemio', success: req.session.success, errors: req.session.errors, user: req.session.user });
   req.session.errors = null;
   req.session.success = null;
 
-  // get users from db
+  // get users from db and prints them
   MongoClient.connect(url, function(err, db){
     if(err != null){
       console.log("error at db connect");
@@ -47,9 +47,9 @@ router.post('/register', function(req, res, next){
       if(count == 0){
         console.log("no users");
       }else{
-        console.log("has users");
+        console.log("currently " + count + "users");
       }
-      res.render('register', { title: 'Register Account', errors: req.session.errors });
+      res.render('register', { title: 'Bohemio', errors: req.session.errors });
     });
   });
   req.session.errors = null;
@@ -61,6 +61,7 @@ router.post('/register/submit-account', function(req, res, next){
 
   var inputUsername = req.body.username;
   var inputPassword = req.body.password;
+  var inputUsertype = req.body.usertype;
   var loggedUser = req.session.user;
   var userID = "";
   var objectID = null;
@@ -68,22 +69,21 @@ router.post('/register/submit-account', function(req, res, next){
   // mongodb user insertion
   var item = {
     username: inputUsername,
-    password: inputPassword
+    password: inputPassword,
+    usertype: inputUsertype
   };
   MongoClient.connect(url, function(err, db){
     db.collection('user-data').count().then((count) => {
       console.log("number of users from db: " + count);
-
-      // if creating super user
+      // count users
       if(count == 0){
-        // add it to db
         console.log("no users");
       }
-      // if super user already set up
       else{
         console.log("has users")
       }
 
+      // insert user to db
       db.collection('user-data').insertOne(item, function(err, result){
         userID = (result.insertedId).toString();
         objectID = result.insertedId;

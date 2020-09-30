@@ -1,17 +1,25 @@
-<div class="row panel panel-default">
+<div class="card">
 
-    <div class="panel-heading">Register your account: </div>
-    <div class="panel-body">
+    <div class="card-header">Register your account: </div>
+    <div class="card-body">
         <form>
             <div class = "input">
-            <label for = "username" style = "display: block;"> Username: </label>
-            <input type = "text" id = "username" name = "username">
+            <label for = "username" style = "display: block;"> Username </label>
+            <input type = "text" class="form-control" id = "username" name = "username">
             </div>
             <div class = "input">
-            <label for = "password" style = "display: block;"> Password: </label>
-            <input type = "text" id = "password" name = "password">
+            <label for = "password" style = "display: block;"> Password </label>
+            <input type = "text" class="form-control" id = "password" name = "password">
             </div>
-            <button type = "submit" formaction="/register/submit-account" formmethod="post">Register</button>
+            <div class = "input">
+            <label for = "username" style = "display: block;"> What's your role? </label>
+            <select class="form-control" id = "usertype" name = "usertype">
+                <option value="artist">Artist</option>
+                <option value="company">Company</option>
+            </select>
+            <br/>
+            <br/>
+            <button type = "submit" class="btn btn-success" formaction="/register/submit-account" formmethod="post">Register</button>
         </form>
     </div>
 </div>
