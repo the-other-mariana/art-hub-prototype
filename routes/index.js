@@ -9,16 +9,17 @@ const { path2 } = require('../app');
 const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 var loggedUser = "";
+var successLog = false;
 
 // set storage engine
-
 const storage = multer.diskStorage({
   destination: './public/uploads/',
   filename: function(req, file, cb){
-    cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
+    cb(null, file.fieldname + '-' + loggedUser + '-' + Date.now() + path.extname(file.originalname));
   }
 });
 
+// set upload function
 const upload = multer({
   storage: storage
 }).single('myImage');
@@ -163,6 +164,7 @@ router.post('/login', function(req, res, next){
         req.session.mongoID = objectID;
         console.log("successfull validation of " + objectID);
         loggedUser = req.session.user;
+        successLog = true;
         console.log("logged user: " + req.session.user);
         res.redirect('/');
       }else{
@@ -170,6 +172,7 @@ router.post('/login', function(req, res, next){
         req.session.user = "";
         req.session.mongoID = null;
         console.log("unsuccessfull validation");
+        successLog = false;
         res.redirect('/');
       }
     });
@@ -188,9 +191,9 @@ router.post('/uploadphoto', function(req, res, next){
       res.render('index', {user: loggedUser, status:req.session.status});
     } else {
       console.log(req.file);
-      req.session.status = "success";
+      req.session.upstatus = "success";
       console.log(loggedUser);
-      res.render('index', {success: true, user: loggedUser, status:req.session.status});
+      res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status:req.session.upstatus});
     }
   });
   
