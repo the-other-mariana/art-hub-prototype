@@ -1,15 +1,41 @@
 {{# if success }}
   <section>
-    <div class="card">
+      <script>
 
-      <div class="card-header"><h4>Hello, {{ user }}</h4></div>
-      <div class="card-body">
-        <form>
-          <button type = "submit" class="btn btn-secondary" formaction="/additem" formmethod="post">Add Item</button>
-        </form>
+      </script>
+
+      <div class="card-columns">
+
+        <div class="card text-white bg-dark" width="100%">
+          <img id="myImg" src="#" alt="your image" height=100% width=100%>
+
+          <div class="card-body">
+            <h5 class="card-title">Hello, I'm {{ user }}</h5>
+            <p class="card-text"></p>
+          </div>
+
+          <div class="card-footer">
+            
+            <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
+              <input type="file" name="myImage"/>
+              <button type = "submit" class="btn btn-secondary">Upload</button>
+            </form>
+            {{ status }}
+          </div>
+        </div>
+
+        <div class="card text-white bg-dark mb-3">
+          <blockquote class="blockquote mb-0 card-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+            <footer class="blockquote-footer">
+              <small class="text-muted">
+                Someone famous in <cite title="Source Title">Source Title</cite>
+              </small>
+            </footer>
+          </blockquote>
+        </div>
       </div>
 
-    </div>
   </section>
 {{else}}
   {{# if errors}}
@@ -21,7 +47,7 @@
       </ul>
     </section>
   {{/if}}
-  <div class="card">
+  <div class="card text-white bg-dark mb-3">
 
       <div class="card-header">Log in with your account: </div>
       <div class="card-body">

@@ -1,7 +1,27 @@
 var express = require('express');
 var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
+fs = require('fs-extra');
+const util = require("util");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const { path2 } = require('../app');
 const url = 'mongodb://localhost:27017/arthubdb';
+const path = require('path');
+var loggedUser = "";
+
+// set storage engine
+
+const storage = multer.diskStorage({
+  destination: './public/uploads/',
+  filename: function(req, file, cb){
+    cb(null, file.fieldname + '_' + Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage
+}).single('myImage');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,6 +31,7 @@ router.get('/', function(req, res, next) {
 
   // get users from db and prints them
   MongoClient.connect(url, function(err, db){
+    console.log("users");
     if(err != null){
       console.log("error at db connect");
     }
@@ -18,6 +39,21 @@ router.get('/', function(req, res, next) {
     cursor.forEach(function(doc, err){
       console.log(doc);
     }, function(){
+
+      db.close();
+    });
+  });
+
+  MongoClient.connect(url, function(err, db){
+    console.log("profiles");
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('profile').find();
+    cursor.forEach(function(doc, err){
+      console.log(doc);
+    }, function(){
+      
       db.close();
     });
   });
@@ -126,6 +162,7 @@ router.post('/login', function(req, res, next){
         req.session.user = loginusername;
         req.session.mongoID = objectID;
         console.log("successfull validation of " + objectID);
+        loggedUser = req.session.user;
         console.log("logged user: " + req.session.user);
         res.redirect('/');
       }else{
@@ -141,5 +178,23 @@ router.post('/login', function(req, res, next){
 
 
 });
+
+
+router.post('/uploadphoto', function(req, res, next){
+  console.log("upload...");
+  upload(req, res, (err) => {
+    if (err){
+      req.session.status = err;
+      res.render('index', {user: loggedUser, status:req.session.status});
+    } else {
+      console.log(req.file);
+      req.session.status = "success";
+      console.log(loggedUser);
+      res.render('index', {success: true, user: loggedUser, status:req.session.status});
+    }
+  });
+  
+});
+
 
 module.exports = router;
