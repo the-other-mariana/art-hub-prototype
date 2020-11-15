@@ -1,7 +1,9 @@
+
 {{# if success }}
   <section>
       
 
+      <script src="/javascripts/update-prof-pic.js"></script>
       <div class="card-columns">
 
         <div class="card text-white bg-dark" width="100%">
@@ -15,8 +17,9 @@
           <div class="card-footer">
             
             <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
-              <input type="file" name="myImage"/>
-              <button type = "submit" class="btn btn-secondary">Upload</button>
+              <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Edit Profile Pic</label>
+              <input id = "profPic" type="file" name="myImage" style="display: none"/>
+              <button type = "submit" class="btn btn-primary btn-block btn-outlined">Upload</button>
             </form>
             {{ upstatus }}
           </div>

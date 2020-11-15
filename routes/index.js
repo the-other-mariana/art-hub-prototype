@@ -10,6 +10,7 @@ const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 var loggedUser = "";
 var successLog = false;
+var profilePic = "";
 
 // set storage engine
 const storage = multer.diskStorage({
@@ -100,7 +101,7 @@ router.post('/register/submit-account', function(req, res, next){
   var inputUsername = req.body.username;
   var inputPassword = req.body.password;
   var inputUsertype = req.body.usertype;
-  var profPath = "default";
+  var profPath = "myImage-default.png";
   var loggedUser = req.session.user;
   var userID = "";
   var objectID = null;
@@ -230,5 +231,29 @@ router.post('/uploadphoto', function(req, res, next){
   res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
 });
 
+
+
+// for AJAX resource
+router.get('/profpic', function(req, res, next) {
+  // mongo db get data
+  
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        profilePic = doc.profilePic;
+      }
+    }, function(){
+      db.close();
+      res.send(profilePic);
+      //console.log(App.userslist);
+      console.log("Pic: " + profilePic);
+    });
+  });
+
+});
 
 module.exports = router;
