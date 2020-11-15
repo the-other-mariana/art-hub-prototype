@@ -2,6 +2,12 @@
 
 This a prototype of a web app that allows you to log in and upload your art portfolio. <br />
 
+## Development
+
+1. Install `Node.js v10.15.3`.<br />
+2. Download and install MongoDB Service from [here](https://www.mongodb.com/es).<br />
+3. Download this whole repository.<br />
+
 ## Usage
 
 1. Download this repo. <br />
