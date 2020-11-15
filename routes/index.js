@@ -15,7 +15,8 @@ var successLog = false;
 const storage = multer.diskStorage({
   destination: './public/uploads/',
   filename: function(req, file, cb){
-    cb(null, file.fieldname + '-' + loggedUser + '-' + Date.now() + path.extname(file.originalname));
+    //cb(null, file.fieldname + '-' + loggedUser + '-' + Date.now() + path.extname(file.originalname));
+    cb(null, file.fieldname + '-' + loggedUser + path.extname(file.originalname));
   }
 });
 
@@ -99,6 +100,7 @@ router.post('/register/submit-account', function(req, res, next){
   var inputUsername = req.body.username;
   var inputPassword = req.body.password;
   var inputUsertype = req.body.usertype;
+  var profPath = "default";
   var loggedUser = req.session.user;
   var userID = "";
   var objectID = null;
@@ -107,7 +109,8 @@ router.post('/register/submit-account', function(req, res, next){
   var item = {
     username: inputUsername,
     password: inputPassword,
-    usertype: inputUsertype
+    usertype: inputUsertype,
+    profilePic: profPath
   };
   MongoClient.connect(url, function(err, db){
     db.collection('user-data').count().then((count) => {
@@ -182,21 +185,49 @@ router.post('/login', function(req, res, next){
 
 });
 
-
+// upload button in profile pic
 router.post('/uploadphoto', function(req, res, next){
   console.log("upload...");
   upload(req, res, (err) => {
     if (err){
-      req.session.status = err;
-      res.render('index', {user: loggedUser, status:req.session.status});
+      req.session.upstatus = err;
+      res.render('index', {user: loggedUser, status:req.session.upstatus});
     } else {
       console.log(req.file);
       req.session.upstatus = "success";
       console.log(loggedUser);
-      res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status:req.session.upstatus});
+      
+
+      // update mongodb
+
+      MongoClient.connect(url, function(err, db){
+        if(err != null){
+          console.log("error at db connect");
+        }
+        var cursor = db.collection('user-data').find();
+        cursor.forEach(function(doc, err){
+          if (doc.username == loggedUser){
+            exists = true;
+            userID = (doc._id).toString();
+            objectID = doc._id;
+            doc.profilePic = req.file.filename;
+
+            myquery = {username: loggedUser};
+            newvalues = {username: doc.username, password: doc.password, usertype: doc.usertype, profilePic: req.file.filename};
+            db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+            });
+          }
+        }, function(){
+          db.close();
+        });
+        
+      });
+      
     }
   });
-  
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
 });
 
 

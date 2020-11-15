@@ -1,16 +1,14 @@
 {{# if success }}
   <section>
-      <script>
-
-      </script>
+      
 
       <div class="card-columns">
 
         <div class="card text-white bg-dark" width="100%">
-          <img id="myImg" src="#" alt="your image" height=100% width=100%>
+          <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
 
           <div class="card-body">
-            <h5 class="card-title">Hello, I'm {{ user }}</h5>
+            <h5 id="user" class="card-title">{{ user }}</h5>
             <p class="card-text"></p>
           </div>
 
@@ -35,7 +33,12 @@
           </blockquote>
         </div>
       </div>
-
+      <script>
+        user = document.getElementById("user").textContent;
+        profilePic = document.getElementById("profilePic");
+        imgPath = "../../public/uploads/myImage-" + user + ".png";
+        //profilePic.src = imgPath;
+      </script>
   </section>
 {{else}}
   {{# if errors}}
