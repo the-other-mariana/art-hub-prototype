@@ -25,6 +25,10 @@ $(document).ready(function() {
           console.log(data);
           $("#uemail").text(data.email);
           $("#umobile").text(data.mobile);
+
+          // edit data form with default user info
+          $("#upemail").prop("defaultValue", data.email);
+          $("#upmobile").prop("defaultValue", data.mobile);
         }
       });
     }
