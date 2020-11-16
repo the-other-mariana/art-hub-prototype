@@ -22,3 +22,13 @@ This a prototype of a web app that allows you to log in and upload your art port
 [ifconfig.me](http://ifconfig.me/ip) <br />
 
 Mine: 189.163.88.56 <br />
+
+## Progress
+
+Bohemio starts like with a simple login:<br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/login01.png?raw=true) <br />
+
+Then goes on to let you choose and upload your profile picture. This is a file input that will be stored in the server locally, in a folder called uploads, for simplicity. You can edit your contact information as well. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/contact-info.png?raw=true) <br />
