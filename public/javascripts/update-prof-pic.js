@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    function loadInfo(){
+    function loadPic(){
       $.ajax({
         async: true,
         url: 'profpic/',
@@ -15,10 +15,10 @@ $(document).ready(function() {
       });
     }
   
-    loadInfo();
+    loadPic();
   
     setInterval(function(){
-      loadInfo(); // this will run after every 1 second
+      loadPic(); // this will run after every 1 second
     }, 3000);
   
     /*

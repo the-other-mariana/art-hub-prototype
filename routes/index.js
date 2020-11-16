@@ -102,6 +102,8 @@ router.post('/register/submit-account', function(req, res, next){
   var inputPassword = req.body.password;
   var inputUsertype = req.body.usertype;
   var profPath = "myImage-default.png";
+  var uemail = "email@example.com";
+  var umobile = "000 000 0000";
   var loggedUser = req.session.user;
   var userID = "";
   var objectID = null;
@@ -111,7 +113,9 @@ router.post('/register/submit-account', function(req, res, next){
     username: inputUsername,
     password: inputPassword,
     usertype: inputUsertype,
-    profilePic: profPath
+    profilePic: profPath,
+    email: uemail,
+    mobile: umobile
   };
   MongoClient.connect(url, function(err, db){
     db.collection('user-data').count().then((count) => {
@@ -214,7 +218,14 @@ router.post('/uploadphoto', function(req, res, next){
             doc.profilePic = req.file.filename;
 
             myquery = {username: loggedUser};
-            newvalues = {username: doc.username, password: doc.password, usertype: doc.usertype, profilePic: req.file.filename};
+            newvalues = {
+              username: doc.username, 
+              password: doc.password, 
+              usertype: doc.usertype, 
+              profilePic: req.file.filename,
+              email: doc.email,
+              mobile: doc.mobile
+            };
             db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
               if (err) throw err;
               console.log("1 document updated");
@@ -231,7 +242,37 @@ router.post('/uploadphoto', function(req, res, next){
   res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
 });
 
+router.post('/updateInfo', function(req, res, next){
 
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        
+        myquery = {username: loggedUser};
+        newvalues = {
+          username: doc.username, 
+          password: doc.password, 
+          usertype: doc.usertype, 
+          profilePic: doc.profilePic, 
+          email: req.body.upemail, 
+          mobile: req.body.upmobile
+        };
+        db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");
+        });
+      }
+    }, function(){
+      db.close();
+    });
+    
+  });
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
+});
 
 // for AJAX resource
 router.get('/profpic', function(req, res, next) {
