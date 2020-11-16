@@ -25,17 +25,39 @@
           </div>
         </div>
 
-        <div class="card text-white bg-dark mb-3">
-          <blockquote class="blockquote mb-0 card-body">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-            <footer class="blockquote-footer">
-              <small class="text-muted">
-                Someone famous in <cite title="Source Title">Source Title</cite>
-              </small>
-            </footer>
-          </blockquote>
+        <div class="card text-center text-white bg-dark">
+          <div class="card-body">
+            <h5 class="card-title">Contact Me</h5>
+            <p class="card-text">email@example.com</p>
+            <p class="card-text">Mobile Number</p>
+            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">
+              Edit Info
+            </button>
+          </div>
         </div>
       </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Contact Info</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <script>
         user = document.getElementById("user").textContent;
         profilePic = document.getElementById("profilePic");
