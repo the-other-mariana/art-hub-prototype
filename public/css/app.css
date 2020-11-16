@@ -9,6 +9,10 @@ body {
   padding: 5px;
 }
 
+.card-columns {
+  column-count: 3;
+}
+
 .jumbotron {
   background-color:#38324a!important;
 }

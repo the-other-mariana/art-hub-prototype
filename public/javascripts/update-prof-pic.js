@@ -40,6 +40,6 @@ $(document).ready(function() {
       // this will run after every 1 second
       loadPic(); 
       loadContact();
-    }, 3000);
+    }, 6000);
     
   });
