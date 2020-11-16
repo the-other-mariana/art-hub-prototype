@@ -14,17 +14,28 @@ $(document).ready(function() {
         }
       });
     }
+
+    function loadContact(){
+      $.ajax({
+        async: true,
+        url: 'contactInfo/',
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          console.log(data);
+          $("#uemail").text(data.email);
+          $("#umobile").text(data.mobile);
+        }
+      });
+    }
   
     loadPic();
+    loadContact();
   
     setInterval(function(){
-      loadPic(); // this will run after every 1 second
+      // this will run after every 1 second
+      loadPic(); 
+      loadContact();
     }, 3000);
-  
-    /*
-      $("#users-button").click((e) => {
-        e.preventDefault();
-        loadInfo();
-      });
-      */
+    
   });

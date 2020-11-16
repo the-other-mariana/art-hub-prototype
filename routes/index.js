@@ -8,9 +8,11 @@ const GridFsStorage = require("multer-gridfs-storage");
 const { path2 } = require('../app');
 const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
+
 var loggedUser = "";
 var successLog = false;
 var profilePic = "";
+var contactInfo = {email: "none", mobile: "0"};
 
 // set storage engine
 const storage = multer.diskStorage({
@@ -242,6 +244,29 @@ router.post('/uploadphoto', function(req, res, next){
   res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
 });
 
+// for AJAX resource
+router.get('/profpic', function(req, res, next) {
+  // mongo db get data
+  
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        profilePic = doc.profilePic;
+      }
+    }, function(){
+      db.close();
+      res.send(profilePic);
+      //console.log(App.userslist);
+      console.log("Pic: " + profilePic);
+    });
+  });
+
+});
+
 router.post('/updateInfo', function(req, res, next){
 
   MongoClient.connect(url, function(err, db){
@@ -275,7 +300,7 @@ router.post('/updateInfo', function(req, res, next){
 });
 
 // for AJAX resource
-router.get('/profpic', function(req, res, next) {
+router.get('/contactInfo', function(req, res, next) {
   // mongo db get data
   
   MongoClient.connect(url, function(err, db){
@@ -285,13 +310,13 @@ router.get('/profpic', function(req, res, next) {
     var cursor = db.collection('user-data').find();
     cursor.forEach(function(doc, err){
       if (doc.username == loggedUser){
-        profilePic = doc.profilePic;
+        contactInfo.email = doc.email;
+        contactInfo.mobile = doc.mobile;
       }
     }, function(){
       db.close();
-      res.send(profilePic);
-      //console.log(App.userslist);
-      console.log("Pic: " + profilePic);
+      res.send(contactInfo);
+      
     });
   });
 
