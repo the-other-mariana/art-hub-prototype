@@ -10,7 +10,7 @@ const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 
 var loggedUser = "";
-var userType = "";
+var userType = false; // false is for companies, true is for artists
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
@@ -64,7 +64,7 @@ router.get('/', function(req, res, next) {
     });
   });
 
-  res.render('index', { title: 'Bohemio', success: req.session.success, errors: req.session.errors, user: req.session.user});
+  res.render('index', { title: 'Bohemio', success: req.session.success, errors: req.session.errors, user: req.session.user, usertype: userType});
   req.session.errors = null;
   req.session.success = null;
 });
@@ -118,15 +118,30 @@ router.post('/register/submit-account', function(req, res, next){
   userType = req.body.usertype;
 
   // mongodb user insertion
-  var item = {
-    username: inputUsername,
-    password: inputPassword,
-    usertype: inputUsertype,
-    profilePic: profPath,
-    email: uemail,
-    mobile: umobile,
-    projects: []
-  };
+  var item = {}
+  if (inputUsertype == "artist"){
+    item = {
+      username: inputUsername,
+      password: inputPassword,
+      usertype: inputUsertype,
+      profilePic: profPath,
+      email: uemail,
+      mobile: umobile,
+      projects: []
+    };
+  }
+  if (inputUsertype == "company"){
+    item = {
+      username: inputUsername,
+      password: inputPassword,
+      usertype: inputUsertype,
+      profilePic: profPath,
+      email: uemail,
+      mobile: umobile,
+      vacancies: []
+    };
+  }
+  
   MongoClient.connect(url, function(err, db){
     db.collection('user-data').count().then((count) => {
       console.log("number of users from db: " + count);
@@ -172,6 +187,12 @@ router.post('/login', function(req, res, next){
         exists = true;
         userID = (doc._id).toString();
         objectID = doc._id;
+        if (doc.usertype == "artist"){
+          userType = true;
+        }
+        if (doc.usertype == "company"){
+          userType = false;
+        }
       }
     }, function(){
       db.close();
@@ -181,6 +202,7 @@ router.post('/login', function(req, res, next){
         req.session.user = loginusername;
         req.session.mongoID = objectID;
         console.log("successfull validation of " + objectID);
+        
         loggedUser = req.session.user;
         successLog = true;
         console.log("logged user: " + req.session.user);
@@ -206,7 +228,7 @@ router.post('/uploadphoto', function(req, res, next){
   upload(req, res, (err) => {
     if (err){
       req.session.upstatus = err;
-      res.render('index', {user: loggedUser, status:req.session.upstatus});
+      res.render('index', {user: loggedUser, status:req.session.upstatus, usertype: userType});
     } else {
       console.log(req.file);
       req.session.upstatus = "success";
@@ -250,7 +272,7 @@ router.post('/uploadphoto', function(req, res, next){
       
     }
   });
-  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
 });
 
 // for AJAX resource
@@ -306,7 +328,7 @@ router.post('/updateInfo', function(req, res, next){
     });
     
   });
-  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
 });
 
 // for AJAX resource
@@ -385,7 +407,7 @@ router.post('/newProject', function(req, res, next){
       
     }
   });
-  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
 });
 
 // for AJAX resource

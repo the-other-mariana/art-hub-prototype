@@ -37,6 +37,9 @@ Uploading projects was implemented next, where a modal pops up to configure the 
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/projects-front.png?raw=true) <br />
 
+Meanwhile, if the user is a company then shows the following. It is still under construction. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/company-prof.png?raw=true) <br />
 
 ## Helpful Links
 

@@ -9,52 +9,95 @@
         <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-secondary" type="submit">Search</button>
       </form>
+      {{# if usertype }}
+        <!-- ARTIST GO HERE -->
+        <div class="card-columns">
 
-      <div class="card-columns">
+          <div class="card text-white bg-dark w-75" width="100%">
+            <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
 
-        <div class="card text-white bg-dark w-75" width="100%">
-          <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
+            <div class="card-body">
+              <h5 id="user" class="card-title">{{ user }}</h5>
+              <p class="card-text"></p>
+            </div>
 
-          <div class="card-body">
-            <h5 id="user" class="card-title">{{ user }}</h5>
-            <p class="card-text"></p>
+            <div class="card-footer">
+              
+              <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
+                <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
+                <input id = "profPic" type="file" name="myImage" style="display: none"/>
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
+                <button type="button" class="btn btn-primary btn-block btn-outlined" data-toggle="modal" data-target="#projectModal">
+                New Project
+                </button>
+              </form>
+              
+              
+            </div>
           </div>
 
-          <div class="card-footer">
-            
-            <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
-              <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
-              <input id = "profPic" type="file" name="myImage" style="display: none"/>
-              <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
-              <button type="button" class="btn btn-primary btn-block btn-outlined" data-toggle="modal" data-target="#projectModal">
-              New Project
+          <div class="card text-center text-white bg-dark w-75">
+            <div class="card-body">
+              <h5 class="card-title">Contact</h5>
+              <p id="uemail" class="card-text"></p>
+              <p id="umobile" class="card-text"></p>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">
+                Edit Info
               </button>
-            </form>
-            
+            </div>
+          </div>
+
+          <!-- PROJECTS GO HERE -->
+          <div id="projSection">
             
           </div>
-        </div>
 
-        <div class="card text-center text-white bg-dark w-75">
-          <div class="card-body">
-            <h5 class="card-title">Contact</h5>
-            <p id="uemail" class="card-text"></p>
-            <p id="umobile" class="card-text"></p>
-            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">
-              Edit Info
-            </button>
+        </div>
+      {{else}}
+      <!-- COMPANIES GO HERE -->
+        <div class="card-columns">
+
+          <div class="card text-white bg-dark w-75" width="100%">
+            <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
+
+            <div class="card-body">
+              <h5 id="user" class="card-title">{{ user }}</h5>
+              <p class="card-text"></p>
+            </div>
+
+            <div class="card-footer">
+              
+              <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
+                <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
+                <input id = "profPic" type="file" name="myImage" style="display: none"/>
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
+                <button type="button" class="btn btn-primary btn-block btn-outlined" data-toggle="modal" data-target="#projectModal">
+                New Vacancy
+                </button>
+              </form>
+              
+              
+            </div>
           </div>
+
+          <div class="card text-center text-white bg-dark w-75">
+            <div class="card-body">
+              <h5 class="card-title">Contact</h5>
+              <p id="uemail" class="card-text"></p>
+              <p id="umobile" class="card-text"></p>
+              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#contactModal">
+                Edit Info
+              </button>
+            </div>
+          </div>
+
+          <!-- VACANCIES GO HERE -->
+          <div id="vacSection">
+            
+          </div>
+
         </div>
-
-        <!-- PROJECTS GO HERE -->
-        <div id="projSection">
-          
-        </div>
-
-      </div>
-      
-      
-
+      {{/if}}
       <!-- Modal CONTACT -->
       <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
