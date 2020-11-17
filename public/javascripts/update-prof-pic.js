@@ -57,7 +57,8 @@ $(document).ready(function() {
               projSection.append(projTemplate.html());
             }
           }
-          if ((data[data.length - 1] == true) && (data.length > 0) ){
+          // if user is company and there are vacancies
+          if ((data[data.length - 1] == false) && (data.length > 0) ){
             $('#vacSection').empty();
             var projSection = $('#vacSection');
 
