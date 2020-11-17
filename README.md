@@ -1,4 +1,4 @@
-# Art Hub
+# Bohemio
 
 This a prototype of a web app that allows you to log in and upload your art portfolio. <br />
 
