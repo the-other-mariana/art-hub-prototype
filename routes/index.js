@@ -388,5 +388,26 @@ router.post('/newProject', function(req, res, next){
   res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
 });
 
+// for AJAX resource
+router.get('/projectInfo', function(req, res, next) {
+  // mongo db get data
+  var cprojects = [];
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        cprojects = doc.projects;
+      }
+    }, function(){
+      db.close();
+      res.send(cprojects);
+      
+    });
+  });
+
+});
 
 module.exports = router;

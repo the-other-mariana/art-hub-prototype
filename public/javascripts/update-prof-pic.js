@@ -49,7 +49,7 @@ $(document).ready(function() {
             var projTemplate = $('#projTemplate');
             projTemplate.find('.card-title').text(data[i].title);
             projTemplate.find('.card-text').text(data[i].description);
-            var f = '/uploads/' + data;
+            var f = '/uploads/' + data[i].media;
             projTemplate.find('.card-img-top').attr("src", f);
   
             projSection.append(projTemplate.html());
@@ -61,11 +61,13 @@ $(document).ready(function() {
   
     loadPic();
     loadContact();
+    loadProjects();
   
     setInterval(function(){
       // this will run after every 1 second
       loadPic(); 
       loadContact();
+      loadProjects();
     }, 6000);
     
   });

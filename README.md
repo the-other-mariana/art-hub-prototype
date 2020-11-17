@@ -33,6 +33,11 @@ Then goes on to let you choose and upload your profile picture. This is a file i
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/contact-info.png?raw=true) <br />
 
+Uploading projects was implemented next, where a modal pops up to configure the projects info and media. Then, the page updates and your projects can be seen. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/projects-front.png?raw=true) <br />
+
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />
