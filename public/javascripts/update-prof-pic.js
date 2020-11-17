@@ -48,13 +48,26 @@ $(document).ready(function() {
 
             // last element contains user type
             for(var i = 0; i < data.length - 1; i++){
-              var projTemplate = $('#projTemplate');
-              projTemplate.find('.card-title').text(data[i].title);
-              projTemplate.find('.card-text').text(data[i].description);
-              var f = '/uploads/' + data[i].media;
-              projTemplate.find('.card-img-top').attr("src", f);
-    
-              projSection.append(projTemplate.html());
+              var projTemplate;
+              if (data[i].type == "image"){
+                projTemplate = $('#ImgProjTemplate');
+                projTemplate.find('.card-title').text(data[i].title);
+                projTemplate.find('.card-text').text(data[i].description);
+                var f = '/uploads/' + data[i].media;
+                projTemplate.find('.card-img-top').attr("src", f);
+      
+                projSection.append(projTemplate.html());
+              }
+              if (data[i].type == "video"){
+                projTemplate = $('#VidProjTemplate');
+                projTemplate.find('.card-title').text(data[i].title);
+                projTemplate.find('.card-text').text(data[i].description);
+                var f = '/uploads/' + data[i].media;
+                projTemplate.find('.img-fluid').attr("src", f);
+      
+                projSection.append(projTemplate.html());
+              }
+              
             }
           }
           // if user is company and there are vacancies
@@ -81,12 +94,12 @@ $(document).ready(function() {
     loadPic();
     loadContact();
     loadItems();
-  
+    /*
     setInterval(function(){
       // this will run after every 1 second
       loadPic(); 
       loadContact();
       loadItems();
-    }, 6000);
+    }, 6000);*/
     
   });

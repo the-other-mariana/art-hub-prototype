@@ -378,6 +378,7 @@ router.post('/newProject', function(req, res, next){
             newProj = {
               title: req.body.projName, 
               description: req.body.projDescrip,
+              type: req.body.projType,
               media: req.file.filename
             };
 

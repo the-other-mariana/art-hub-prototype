@@ -146,10 +146,16 @@
                   <label for = "projName" style = "display: block;"> Name: </label>
                   <input type = "text" class="form-control" id = "projName" name = "projName">
 
-                  <label for = "projDescrip" style = "display: block;"> Description </label>
+                  <label for = "projDescrip" style = "display: block;"> Description: </label>
                   <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
 
-                  <label for = "projPic" style = "display: block;"> Picture: </label>
+                  <label for = "projType" style = "display: block;"> Type: </label>
+                  <select class="form-control" id = "projType" name = "projType">
+                      <option value="image">Image</option>
+                      <option value="video">Video</option>
+                  </select>
+
+                  <label for = "projPic" style = "display: block;"> Media: </label>
                   <input id = "projPic" type="file" name="myImage"/>
 
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -166,10 +172,22 @@
         </div>
       </div>
 
-      <!-- PROJECT TEMPLATE -->
-      <div id="projTemplate" style="display: none;">
+      <!-- IMG PROJECT TEMPLATE -->
+      <div id="ImgProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
           <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+      </div>
+      <!-- VID PROJECT TEMPLATE -->
+      <div id="VidProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+          <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" playsinline autoplay muted loop>
+          <!--<source  type="video/mp4">-->
+          </video>
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>

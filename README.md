@@ -41,6 +41,10 @@ Meanwhile, if the user is a company then shows the following. It is still under 
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/company-prof.png?raw=true) <br />
 
+So Far, the artist profile looks like the following: <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/projects-gif.gif) <br />
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />
