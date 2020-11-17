@@ -45,6 +45,10 @@ So Far, the artist profile looks like the following: <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/projects-gif.gif) <br />
 
+I added 4 types of proyects: picture, video, animation (on loop) and audio. A profile ends up like this. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/project-types.png?raw=true) <br />
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />

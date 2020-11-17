@@ -49,8 +49,8 @@ $(document).ready(function() {
             // last element contains user type
             for(var i = 0; i < data.length - 1; i++){
               var projTemplate;
-              if (data[i].type == "image"){
-                projTemplate = $('#ImgProjTemplate');
+              if (data[i].type == "picture"){
+                projTemplate = $('#PicProjTemplate');
                 projTemplate.find('.card-title').text(data[i].title);
                 projTemplate.find('.card-text').text(data[i].description);
                 var f = '/uploads/' + data[i].media;
@@ -64,6 +64,24 @@ $(document).ready(function() {
                 projTemplate.find('.card-text').text(data[i].description);
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.img-fluid').attr("src", f);
+      
+                projSection.append(projTemplate.html());
+              }
+              if (data[i].type == "animation"){
+                projTemplate = $('#AnimProjTemplate');
+                projTemplate.find('.card-title').text(data[i].title);
+                projTemplate.find('.card-text').text(data[i].description);
+                var f = '/uploads/' + data[i].media;
+                projTemplate.find('.img-fluid').attr("src", f);
+      
+                projSection.append(projTemplate.html());
+              }
+              if (data[i].type == "audio"){
+                projTemplate = $('#AudioProjTemplate');
+                projTemplate.find('.card-title').text(data[i].title);
+                projTemplate.find('.card-text').text(data[i].description);
+                var f = '/uploads/' + data[i].media;
+                projTemplate.find('.my-audio').attr("src", f);
       
                 projSection.append(projTemplate.html());
               }

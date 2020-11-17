@@ -140,40 +140,39 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            
-              <div class="modal-body">
-                <form action="/newProject" method="post" enctype='multipart/form-data'>
-                  <label for = "projName" style = "display: block;"> Name: </label>
-                  <input type = "text" class="form-control" id = "projName" name = "projName">
+              <form action="/newProject" method="post" enctype='multipart/form-data'>
+                <div class="modal-body">
+                  
+                    <label for = "projName" style = "display: block;"> Name: </label>
+                    <input type = "text" class="form-control" id = "projName" name = "projName">
 
-                  <label for = "projDescrip" style = "display: block;"> Description: </label>
-                  <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
+                    <label for = "projDescrip" style = "display: block;"> Description: </label>
+                    <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
 
-                  <label for = "projType" style = "display: block;"> Type: </label>
-                  <select class="form-control" id = "projType" name = "projType">
-                      <option value="image">Image</option>
-                      <option value="video">Video</option>
-                  </select>
-
-                  <label for = "projPic" style = "display: block;"> Media: </label>
-                  <input id = "projPic" type="file" name="myImage"/>
-
+                    <label for = "projType" style = "display: block;"> Type: </label>
+                    <select class="form-control" id = "projType" name = "projType">
+                        <option value="picture">Picture</option>
+                        <option value="video">Video</option>
+                        <option value="animation">Animation</option>
+                        <option value="audio">Audio</option>
+                    </select>
+                    <br/>
+                    <label for = "projPic" style = "display: block;"> Media: </label>
+                    <input id = "projPic" type="file" name="myImage"/>
+                  <br/>
+                  <br/>
+                </div>
+                <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="submit" class="btn btn-primary">Create</button>
-                </form>
-                <br/>
-                <br/>
-              </div>
-              <div class="modal-footer">
-                
-            </div>
-
+                </div>
+              </form>
           </div>
         </div>
       </div>
 
       <!-- IMG PROJECT TEMPLATE -->
-      <div id="ImgProjTemplate" style="display: none;">
+      <div id="PicProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
           <img class="card-img-top" src="cover-default.png" alt="Card image cap">
           <div class="card-body">
@@ -182,11 +181,11 @@
           </div>
         </div>
       </div>
-      <!-- VID PROJECT TEMPLATE -->
+
+      <!-- CINEMATOGRAPHY PROJECT TEMPLATE -->
       <div id="VidProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
-          <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" playsinline autoplay muted loop>
-          <!--<source  type="video/mp4">-->
+          <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" controls>
           </video>
           <div class="card-body">
             <h5 class="card-title"></h5>
@@ -194,6 +193,34 @@
           </div>
         </div>
       </div>
+
+      <!-- ANIM PROJECT TEMPLATE -->
+      <div id="AnimProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+          <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" playsinline autoplay loop>
+          </video>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AUDIO PROJECT TEMPLATE -->
+      <div id="AudioProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+          
+          <div class="card-body">
+            <audio controls class="my-audio w-100" width=100% src="">
+          </audio>
+            <br/>
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          </div>
+        </div>
+      </div>
+
+
       <!-- VACANCY TEMPLATE -->
       <div id="vacTemplate" style="display: none;">
         <div class="card text-white bg-dark">
