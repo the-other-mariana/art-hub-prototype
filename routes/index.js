@@ -10,6 +10,7 @@ const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 
 var loggedUser = "";
+var userType = "";
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
@@ -30,9 +31,7 @@ const upload = multer({
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Bohemio', success: req.session.success, errors: req.session.errors, user: req.session.user });
-  req.session.errors = null;
-  req.session.success = null;
+  
 
   // get users from db and prints them
   MongoClient.connect(url, function(err, db){
@@ -62,6 +61,10 @@ router.get('/', function(req, res, next) {
       db.close();
     });
   });
+
+  res.render('index', { title: 'Bohemio', success: req.session.success, errors: req.session.errors, user: req.session.user});
+  req.session.errors = null;
+  req.session.success = null;
 });
 
 // for developer version: restart db button
@@ -109,6 +112,8 @@ router.post('/register/submit-account', function(req, res, next){
   var loggedUser = req.session.user;
   var userID = "";
   var objectID = null;
+
+  userType = req.body.usertype;
 
   // mongodb user insertion
   var item = {
