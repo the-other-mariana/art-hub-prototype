@@ -411,21 +411,27 @@ router.post('/newProject', function(req, res, next){
 });
 
 // for AJAX resource
-router.get('/projectInfo', function(req, res, next) {
+router.get('/itemsInfo', function(req, res, next) {
   // mongo db get data
-  var cprojects = [];
+  var citems = [];
+
   MongoClient.connect(url, function(err, db){
     if(err != null){
       console.log("error at db connect");
     }
     var cursor = db.collection('user-data').find();
     cursor.forEach(function(doc, err){
-      if (doc.username == loggedUser){
-        cprojects = doc.projects;
+      if (doc.username == loggedUser && userType == true){
+        citems = doc.projects;
+        citems.push(userType);
+      }
+      if (doc.username == loggedUser && userType == false){
+        citems = doc.vacancies;
+        citems.push(userType);
       }
     }, function(){
       db.close();
-      res.send(cprojects);
+      res.send(citems);
       
     });
   });

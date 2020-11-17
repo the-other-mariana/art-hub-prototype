@@ -33,26 +33,44 @@ $(document).ready(function() {
       });
     }
 
-    function loadProjects(){
+    function loadItems(){
       $.ajax({
         async: true,
-        url: 'projectInfo/',
+        url: 'itemsInfo/',
         type: 'GET',
         dataType: 'json',
         success: (data) => {
           console.log(data);
-          $('#projSection').empty();
-          var projSection = $('#projSection');
+          // if user is artist and thre are projects
+          if ((data[data.length - 1] == true) && (data.length > 0) ){
+            $('#projSection').empty();
+            var projSection = $('#projSection');
 
-          
-          for(var i = 0; i < data.length; i++){
-            var projTemplate = $('#projTemplate');
-            projTemplate.find('.card-title').text(data[i].title);
-            projTemplate.find('.card-text').text(data[i].description);
-            var f = '/uploads/' + data[i].media;
-            projTemplate.find('.card-img-top').attr("src", f);
-  
-            projSection.append(projTemplate.html());
+            // last element contains user type
+            for(var i = 0; i < data.length - 1; i++){
+              var projTemplate = $('#projTemplate');
+              projTemplate.find('.card-title').text(data[i].title);
+              projTemplate.find('.card-text').text(data[i].description);
+              var f = '/uploads/' + data[i].media;
+              projTemplate.find('.card-img-top').attr("src", f);
+    
+              projSection.append(projTemplate.html());
+            }
+          }
+          if ((data[data.length - 1] == true) && (data.length > 0) ){
+            $('#vacSection').empty();
+            var projSection = $('#vacSection');
+
+            // last element contains user type
+            for(var i = 0; i < data.length - 1; i++){
+              var projTemplate = $('#vacTemplate');
+              projTemplate.find('.card-title').text(data[i].title);
+              projTemplate.find('.card-text').text(data[i].description);
+              var f = '/uploads/' + data[i].media;
+              projTemplate.find('.card-img-top').attr("src", f);
+    
+              projSection.append(projTemplate.html());
+            }
           }
 
         }
@@ -61,13 +79,13 @@ $(document).ready(function() {
   
     loadPic();
     loadContact();
-    loadProjects();
+    loadItems();
   
     setInterval(function(){
       // this will run after every 1 second
       loadPic(); 
       loadContact();
-      loadProjects();
+      loadItems();
     }, 6000);
     
   });
