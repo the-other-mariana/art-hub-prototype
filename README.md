@@ -32,3 +32,7 @@ Bohemio starts like with a simple login:<br />
 Then goes on to let you choose and upload your profile picture. This is a file input that will be stored in the server locally, in a folder called uploads, for simplicity. You can edit your contact information as well. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/contact-info.png?raw=true) <br />
+
+## Helpful Links
+
+[upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />

@@ -19,8 +19,10 @@ var contactInfo = {email: "none", mobile: "0"};
 const storage = multer.diskStorage({
   destination: './public/uploads/',
   filename: function(req, file, cb){
+    var nameOnly = path.basename(file.originalname, path.extname(file.originalname));
     //cb(null, file.fieldname + '-' + loggedUser + '-' + Date.now() + path.extname(file.originalname));
-    cb(null, file.fieldname + '-' + loggedUser + path.extname(file.originalname));
+    cb(null, nameOnly + '-' + loggedUser + path.extname(file.originalname));
+    console.log("passed storage--");
   }
 });
 
@@ -122,7 +124,8 @@ router.post('/register/submit-account', function(req, res, next){
     usertype: inputUsertype,
     profilePic: profPath,
     email: uemail,
-    mobile: umobile
+    mobile: umobile,
+    projects: []
   };
   MongoClient.connect(url, function(err, db){
     db.collection('user-data').count().then((count) => {
@@ -231,7 +234,8 @@ router.post('/uploadphoto', function(req, res, next){
               usertype: doc.usertype, 
               profilePic: req.file.filename,
               email: doc.email,
-              mobile: doc.mobile
+              mobile: doc.mobile,
+              projects: doc.projects,
             };
             db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
               if (err) throw err;
@@ -289,7 +293,8 @@ router.post('/updateInfo', function(req, res, next){
           usertype: doc.usertype, 
           profilePic: doc.profilePic, 
           email: req.body.upemail, 
-          mobile: req.body.upmobile
+          mobile: req.body.upmobile,
+          projects: doc.projects
         };
         db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
           if (err) throw err;
@@ -326,5 +331,62 @@ router.get('/contactInfo', function(req, res, next) {
   });
 
 });
+
+router.post('/newProject', function(req, res, next){
+  console.log("new project...");
+  upload(req, res, (err) => {
+    if (err){
+      req.session.upstatus = err;
+      res.render('index', {user: loggedUser, status:req.session.upstatus});
+    } else {
+      console.log(req.file);
+      req.session.upstatus = "success";
+      console.log(loggedUser);
+      
+
+      // update mongodb
+
+      MongoClient.connect(url, function(err, db){
+        if(err != null){
+          console.log("error at db connect");
+        }
+        var cursor = db.collection('user-data').find();
+        cursor.forEach(function(doc, err){
+          if (doc.username == loggedUser){
+            newProj = {
+              title: req.body.projName, 
+              description: req.body.projDescrip,
+              media: req.file.filename
+            };
+
+            var cprojects = doc.projects
+            cprojects.push(newProj);
+
+            myquery = {username: loggedUser};
+            newvalues = {
+              username: doc.username, 
+              password: doc.password, 
+              usertype: doc.usertype, 
+              profilePic: doc.profilePic,
+              email: doc.email,
+              mobile: doc.mobile,
+              projects: cprojects,
+            };
+            db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+            });
+          }
+        }, function(){
+          db.close();
+        });
+        
+      });
+      
+    }
+  });
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus});
+});
+
 
 module.exports = router;

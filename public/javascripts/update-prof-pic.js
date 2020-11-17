@@ -32,6 +32,32 @@ $(document).ready(function() {
         }
       });
     }
+
+    function loadProjects(){
+      $.ajax({
+        async: true,
+        url: 'projectInfo/',
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          console.log(data);
+          $('#projSection').empty();
+          var projSection = $('#projSection');
+
+          
+          for(var i = 0; i < data.length; i++){
+            var projTemplate = $('#projTemplate');
+            projTemplate.find('.card-title').text(data[i].title);
+            projTemplate.find('.card-text').text(data[i].description);
+            var f = '/uploads/' + data;
+            projTemplate.find('.card-img-top').attr("src", f);
+  
+            projSection.append(projTemplate.html());
+          }
+
+        }
+      });
+    }
   
     loadPic();
     loadContact();
