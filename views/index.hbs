@@ -4,13 +4,31 @@
       
 
       <script src="/javascripts/update-prof-pic.js"></script>
-      <!-- Search form -->
-      <form class="form-inline md-form mr-auto mb-4">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-secondary" type="submit">Search</button>
-      </form>
+      <script>
+        function identifyProject(elem){
+          console.log("IDDDDD");
+          proj = ((elem.parentNode).parentNode).childNodes[7].textContent;
+          console.log(proj);
+
+          $('#projID').text(proj);
+          $('#projID').val(parseInt(proj));
+        }
+      </script>
+      
+      
+
       {{# if usertype }}
         <!-- ARTIST GO HERE -->
+
+        <!-- Search form -->
+        <form class="form-inline mr-auto mb-4">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary" type="submit">Search</button>
+          <button type="button" class="btn btn-primary btn-outlined" data-toggle="modal" data-target="#projectModal" style="margin-left: 50px;">
+            New Project
+          </button>
+        </form>
+
         <div class="card-columns">
 
           <div class="card text-white bg-dark w-75" width="100%">
@@ -27,9 +45,6 @@
                 <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
                 <input id = "profPic" type="file" name="myImage" style="display: none"/>
                 <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
-                <button type="button" class="btn btn-primary btn-block btn-outlined" data-toggle="modal" data-target="#projectModal">
-                New Project
-                </button>
               </form>
               
               
@@ -55,6 +70,16 @@
         </div>
       {{else}}
       <!-- COMPANIES GO HERE -->
+
+        <!-- Search form -->
+        <form class="form-inline mr-auto mb-4">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+          <button class="btn btn-secondary" type="submit">Search</button>
+          <button type="button" class="btn btn-primary btn-outlined" data-toggle="modal" data-target="#projectModal" style="margin-left: 50px;">
+            New Vacancy
+          </button>
+        </form>
+
         <div class="card-columns">
 
           <div class="card text-white bg-dark w-75" width="100%">
@@ -71,9 +96,6 @@
                 <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
                 <input id = "profPic" type="file" name="myImage" style="display: none"/>
                 <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
-                <button type="button" class="btn btn-primary btn-block btn-outlined" data-toggle="modal" data-target="#projectModal">
-                New Vacancy
-                </button>
               </form>
               
               
@@ -130,7 +152,7 @@
         </div>
       </div>
 
-      <!-- Modal PROJECT -->
+      <!-- Modal NEW PROJECT -->
       <div class="modal fade" id="projectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -142,7 +164,7 @@
             </div>
               <form action="/newProject" method="post" enctype='multipart/form-data'>
                 <div class="modal-body">
-                  
+                    
                     <label for = "projName" style = "display: block;"> Name: </label>
                     <input type = "text" class="form-control" id = "projName" name = "projName">
 
@@ -171,6 +193,49 @@
         </div>
       </div>
 
+      <!-- Modal EDIT PROJECT -->
+      <div class="modal fade" id="EditProjectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Edit Project</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+              <form action="/editProject" method="post" enctype='multipart/form-data'>
+                <div class="modal-body">
+                    <input type = "text" class="form-control" id = "projID" name = "projID" style="display: none;">
+
+                    <label for = "projName" style = "display: block;"> Name: </label>
+                    <input type = "text" class="form-control" id = "projName" name = "projName">
+
+                    <label for = "projDescrip" style = "display: block;"> Description: </label>
+                    <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
+
+                    <label for = "projType" style = "display: block;"> Type: </label>
+                    <select class="form-control" id = "projType" name = "projType">
+                        <option value="picture">Picture</option>
+                        <option value="video">Video</option>
+                        <option value="animation">Animation</option>
+                        <option value="audio">Audio</option>
+                    </select>
+                    <br/>
+                    <label for = "projPic" style = "display: block;"> Media: </label>
+                    <input id = "projPic" type="file" name="myImage"/>
+                  <br/>
+                  <br/>
+                </div>
+                
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+      
       <!-- IMG PROJECT TEMPLATE -->
       <div id="PicProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
@@ -179,10 +244,16 @@
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+          </div>
+          <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
       </div>
 
-      <!-- CINEMATOGRAPHY PROJECT TEMPLATE -->
+      <!-- VIDEO PROJECT TEMPLATE -->
       <div id="VidProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
           <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" controls>
@@ -191,6 +262,12 @@
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+          </div>
+          <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
       </div>
 
@@ -203,20 +280,30 @@
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+          </div>
+          <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
       </div>
 
       <!-- AUDIO PROJECT TEMPLATE -->
       <div id="AudioProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
-          
+          <audio controls class="my-audio w-100" width=100% src=""></audio>
           <div class="card-body">
-            <audio controls class="my-audio w-100" width=100% src="">
-          </audio>
-            <br/>
+            
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+          </div>
+          <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
       </div>
 
@@ -229,6 +316,7 @@
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
           </div>
+          
         </div>
       </div>
 

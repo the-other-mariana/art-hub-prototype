@@ -49,6 +49,10 @@ I added 4 types of proyects: picture, video, animation (on loop) and audio. A pr
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/project-types.png?raw=true) <br />
 
+Then, the Edit Project option is implemented and an Edit button appears in every project card. The DB is updated as well as the frontend with the new edited info. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/edit-projects.png?raw=true) <br />
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />

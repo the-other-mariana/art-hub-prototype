@@ -53,6 +53,9 @@ $(document).ready(function() {
                 projTemplate = $('#PicProjTemplate');
                 projTemplate.find('.card-title').text(data[i].title);
                 projTemplate.find('.card-text').text(data[i].description);
+                projTemplate.find('.proj-id').text(i);
+                projTemplate.find('.proj-id').val(i);
+
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.card-img-top').attr("src", f);
       
@@ -62,6 +65,9 @@ $(document).ready(function() {
                 projTemplate = $('#VidProjTemplate');
                 projTemplate.find('.card-title').text(data[i].title);
                 projTemplate.find('.card-text').text(data[i].description);
+                projTemplate.find('.proj-id').text(i);
+                projTemplate.find('.proj-id').val(i);
+
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.img-fluid').attr("src", f);
       
@@ -71,6 +77,9 @@ $(document).ready(function() {
                 projTemplate = $('#AnimProjTemplate');
                 projTemplate.find('.card-title').text(data[i].title);
                 projTemplate.find('.card-text').text(data[i].description);
+                projTemplate.find('.proj-id').text(i);
+                projTemplate.find('.proj-id').val(i);
+
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.img-fluid').attr("src", f);
       
@@ -80,6 +89,9 @@ $(document).ready(function() {
                 projTemplate = $('#AudioProjTemplate');
                 projTemplate.find('.card-title').text(data[i].title);
                 projTemplate.find('.card-text').text(data[i].description);
+                projTemplate.find('.proj-id').text(i);
+                projTemplate.find('.proj-id').val(i);
+
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.my-audio').attr("src", f);
       
@@ -108,6 +120,8 @@ $(document).ready(function() {
         }
       });
     }
+
+    
   
     loadPic();
     loadContact();

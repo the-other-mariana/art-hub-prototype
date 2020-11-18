@@ -8,6 +8,7 @@ const GridFsStorage = require("multer-gridfs-storage");
 const { path2 } = require('../app');
 const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
+const { type } = require('os');
 
 var loggedUser = "";
 var userType = false; // false is for companies, true is for artists
@@ -437,6 +438,66 @@ router.get('/itemsInfo', function(req, res, next) {
     });
   });
 
+});
+
+router.post('/editProject', function(req, res, next){
+  console.log("editing project...");
+  upload(req, res, (err) => {
+    if (err){
+      req.session.upstatus = err;
+      res.render('index', {user: loggedUser, status:req.session.upstatus});
+    } else {
+      console.log(req.file);
+      req.session.upstatus = "success";
+      console.log(loggedUser);
+      
+
+      // update mongodb
+
+      MongoClient.connect(url, function(err, db){
+        if(err != null){
+          console.log("error at db connect");
+        }
+        var cursor = db.collection('user-data').find();
+        cursor.forEach(function(doc, err){
+          if (doc.username == loggedUser){
+            console.log(typeof req.body.projID);
+            var index = parseInt(req.body.projID);
+            newProj = {
+              title: req.body.projName, 
+              description: req.body.projDescrip,
+              type: req.body.projType,
+              media: req.file.filename
+            };
+
+            var cprojects = doc.projects
+            //cprojects.push(newProj);
+            cprojects[index] = newProj;
+
+            myquery = {username: loggedUser};
+            newvalues = {
+              username: doc.username, 
+              password: doc.password, 
+              usertype: doc.usertype, 
+              profilePic: doc.profilePic,
+              email: doc.email,
+              mobile: doc.mobile,
+              projects: cprojects,
+            };
+            db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+            });
+          }
+        }, function(){
+          db.close();
+        });
+        
+      });
+      
+    }
+  });
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
 });
 
 module.exports = router;
