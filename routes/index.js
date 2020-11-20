@@ -594,7 +594,7 @@ router.post('/seeUser', function(req, res, next){
 
 router.get('/searchProfileInfo', function(req, res, next) {
   // mongo db get data
-  var cresult = [];
+  var cresult = {whom: null, who: null};
 
   MongoClient.connect(url, function(err, db){
     if(err != null){
@@ -604,7 +604,8 @@ router.get('/searchProfileInfo', function(req, res, next) {
     cursor.forEach(function(doc, err){
 
       if (doc.username == foundUser){
-        cresult = doc;
+        cresult.whom = doc;
+        cresult.who = loggedUser;
       }
     }, function(){
       db.close();
