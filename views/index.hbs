@@ -58,7 +58,7 @@
               <form action="/uploadphoto" method="post" enctype='multipart/form-data'> 
                 <label for="profPic" class="btn btn-secondary btn-block btn-outlined">Choose Profile Pic</label>
                 <input id = "profPic" type="file" name="myImage" style="display: none"/>
-                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Change Profile Pic</button>
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Save Profile Pic</button>
               </form>
               
               
@@ -198,6 +198,9 @@
                     <label for = "projDescrip" style = "display: block;"> Description: </label>
                     <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
 
+                    <label for = "projLink" style = "display: block;"> Addtional Link: </label>
+                    <input type = "text" class="form-control" id = "projLink" name = "projLink">
+
                     <label for = "projType" style = "display: block;"> Type: </label>
                     <select class="form-control" id = "projType" name = "projType">
                         <option value="picture">Picture</option>
@@ -241,6 +244,9 @@
                     <label for = "projDescrip" style = "display: block;"> Description: </label>
                     <input type = "text" class="form-control" id = "projDescrip" name = "projDescrip">
 
+                    <label for = "projLink" style = "display: block;"> Addtional Link: </label>
+                    <input type = "text" class="form-control" id = "projLink" name = "projLink" defaultValue="">
+
                     <label for = "projType" style = "display: block;"> Type: </label>
                     <select class="form-control" id = "projType" name = "projType">
                         <option value="picture">Picture</option>
@@ -271,6 +277,7 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="" class="proj-link"></a>
           </div>
           <div class="card-footer">
             <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
@@ -289,6 +296,7 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="" class="proj-link"></a>
           </div>
           <div class="card-footer">
             <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
@@ -307,6 +315,7 @@
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="" class="proj-link"></a>
           </div>
           <div class="card-footer">
             <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
@@ -325,6 +334,7 @@
             
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="" class="proj-link"></a>
           </div>
           <div class="card-footer">
             <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">

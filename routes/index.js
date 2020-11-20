@@ -15,6 +15,7 @@ const { O_DIRECT } = require('constants');
 var loggedUser = "";
 var foundUser = "";
 var userType = false; // false is for companies, true is for artists
+var foundUserType = false;
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
@@ -422,6 +423,7 @@ router.post('/newProject', function(req, res, next){
             newProj = {
               title: req.body.projName, 
               description: req.body.projDescrip,
+              link: req.body.projLink,
               type: req.body.projType,
               media: req.file.filename
             };
@@ -512,6 +514,7 @@ router.post('/editProject', function(req, res, next){
               title: req.body.projName, 
               description: req.body.projDescrip,
               type: req.body.projType,
+              link: req.body.projLink,
               media: req.file.filename
             };
 
@@ -570,6 +573,7 @@ router.get('/loadSearchResults', function(req, res, next) {
       if ((doc.username == searchInput) || (doc.username).includes(searchInput) || (doc.username).toLowerCase() == searchInput || ((doc.username).toLowerCase()).includes((searchInput).toLowerCase())){
         rusername = doc.username;
         foundUser = doc.username;
+        foundUserType = doc.usertype;
         rpic = doc.profilePic;
         remail = doc.email;
         rmobile = doc.mobile;
@@ -587,7 +591,7 @@ router.get('/loadSearchResults', function(req, res, next) {
 
 router.post('/seeUser', function(req, res, next){
   console.log("see user requested...")
-  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: userType, founduser: foundUser});
+  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: foundUserType, founduser: foundUser});
   req.session.errors = null;
 
 });
@@ -709,7 +713,7 @@ router.post('/updatefollow', function(req, res, next){
     });
     
   });
-  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: userType, founduser: foundUser});
+  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: foundUserType, founduser: foundUser});
 });
 
 router.get('/followInfo', function(req, res, next) {

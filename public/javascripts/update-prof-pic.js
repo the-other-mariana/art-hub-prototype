@@ -64,52 +64,40 @@ $(document).ready(function() {
               var projTemplate;
               if (data[i].type == "picture"){
                 projTemplate = $('#PicProjTemplate');
-                projTemplate.find('.card-title').text(data[i].title);
-                projTemplate.find('.card-text').text(data[i].description);
-                projTemplate.find('.proj-id').text(i);
-                projTemplate.find('.proj-id').val(i);
 
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.card-img-top').attr("src", f);
-      
-                projSection.append(projTemplate.html());
               }
               if (data[i].type == "video"){
                 projTemplate = $('#VidProjTemplate');
-                projTemplate.find('.card-title').text(data[i].title);
-                projTemplate.find('.card-text').text(data[i].description);
-                projTemplate.find('.proj-id').text(i);
-                projTemplate.find('.proj-id').val(i);
 
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.img-fluid').attr("src", f);
-      
-                projSection.append(projTemplate.html());
               }
               if (data[i].type == "animation"){
                 projTemplate = $('#AnimProjTemplate');
-                projTemplate.find('.card-title').text(data[i].title);
-                projTemplate.find('.card-text').text(data[i].description);
-                projTemplate.find('.proj-id').text(i);
-                projTemplate.find('.proj-id').val(i);
 
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.img-fluid').attr("src", f);
-      
-                projSection.append(projTemplate.html());
               }
               if (data[i].type == "audio"){
                 projTemplate = $('#AudioProjTemplate');
-                projTemplate.find('.card-title').text(data[i].title);
-                projTemplate.find('.card-text').text(data[i].description);
-                projTemplate.find('.proj-id').text(i);
-                projTemplate.find('.proj-id').val(i);
 
                 var f = '/uploads/' + data[i].media;
                 projTemplate.find('.my-audio').attr("src", f);
-      
-                projSection.append(projTemplate.html());
               }
+              projTemplate.find('.card-title').text(data[i].title);
+              projTemplate.find('.card-text').text(data[i].description);
+              projTemplate.find('.proj-id').text(i);
+              projTemplate.find('.proj-id').val(i);
+
+              projTemplate.find('.proj-link').text("More Info...");
+              projTemplate.find('.proj-link').attr("href", data[i].link);
+              if(data[i].link == ""){
+                (projTemplate.find('.proj-link')).css("display","none")
+              }
+
+              projSection.append(projTemplate.html());
               
             }
           }

@@ -2,7 +2,6 @@
     <script src="/javascripts/update-search-profile.js"></script>
     {{# if searchusertype }}
     <!-- ARTIST GO HERE -->
-
     <div class="card-columns">
 
         <div class="card text-white bg-dark w-75" width="100%">
@@ -50,11 +49,17 @@
             <div class="card-body">
                 <h5 id="user" class="card-title">{{ founduser }}</h5>
                 <p class="card-text"></p>
+                <small class="text-muted">
+                    Followers <span id="followers" class="badge badge-pill badge-secondary">0</span>
+                </small>
+                <small class="text-muted">
+                    Following <span id="following" class="badge badge-pill badge-secondary">0</span>
+                </small>
             </div>
 
             <div class="card-footer">
                 <form action="/updatefollow" method="post" enctype='multipart/form-data'> 
-                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Follow</button>
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined" id="followBtn">Follow</button>
                 </form>
             </div>
         </div>
@@ -81,11 +86,7 @@
             <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
-            Edit
-            </button>
+            <a href="" class="proj-link"></a>
             </div>
             <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
@@ -99,11 +100,7 @@
             <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
-            Edit
-            </button>
+            <a href="" class="proj-link"></a>
             </div>
             <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
@@ -117,11 +114,7 @@
             <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
-            Edit
-            </button>
+            <a href="" class="proj-link"></a>
             </div>
             <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
@@ -135,11 +128,7 @@
             
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
-            Edit
-            </button>
+            <a href="" class="proj-link"></a>
             </div>
             <div id="id" name="id" class="proj-id" style="display: none;"></div>
         </div>
