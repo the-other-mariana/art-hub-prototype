@@ -53,6 +53,14 @@ Then, the Edit Project option is implemented and an Edit button appears in every
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/edit-projects.png?raw=true) <br />
 
+There is some nav bar at the top of a user view: <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/nav-bar.png?raw=true) <br />
+
+If you click on the search button, the view will provide the results of your search. This is only user search for now. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/search-results.png?raw=true) <br />
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />

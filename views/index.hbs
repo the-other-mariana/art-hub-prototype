@@ -32,7 +32,7 @@
           <div class="search-container">
             <form action="/search" method="post">
               <input type="text" placeholder="Search.." id="searchinput" name="searchinput">
-              <button type="submit">Submit</button>
+              <button type="submit">Search</button>
             </form>
           </div>
         </div>
@@ -83,16 +83,16 @@
         <!-- Search form -->
         <div class="topnav">
           <a class="active" href="#home">Home</a>
-          <a href="#about">Notifications</a>
+          <a href="#notif">Notifications <span class="badge badge-pill badge-secondary">0</span> </a>
 
           <button type="button" class="btn btn-primary btn-outlined" data-toggle="modal" data-target="#projectModal" style="margin-left: 50px;">
             New Project
-            </button>
+          </button>
           
           <div class="search-container">
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search.." name="search">
-              <button type="submit">Submit</button>
+            <form action="/search" method="post">
+              <input type="text" placeholder="Search.." id="searchinput" name="searchinput">
+              <button type="submit">Search</button>
             </form>
           </div>
         </div>
