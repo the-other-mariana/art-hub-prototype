@@ -61,7 +61,7 @@ If you click on the search button, the view will provide the results of your sea
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/search-results.png?raw=true) <br />
 
-You can now follow any artist or company you find in searching mode. <br />
+You can now follow any artist or company you find in searching mode and only if you havent followed that account previously. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/follow-found-user.png?raw=true) <br />
 
