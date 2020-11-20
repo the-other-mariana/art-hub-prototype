@@ -57,9 +57,13 @@ There is some nav bar at the top of a user view: <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/nav-bar.png?raw=true) <br />
 
-If you click on the search button, the view will provide the results of your search. This is only user search for now. <br />
+If you click on the search button, the view will provide the results of your search. This is only user search for now, but the search accepts sub strings and is not case sensitive, in order to show more results. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/search-results.png?raw=true) <br />
+
+You can now follow any artist or company you find in searching mode. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/follow-found-user.png?raw=true) <br />
 
 ## Helpful Links
 

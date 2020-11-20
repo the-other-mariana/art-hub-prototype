@@ -32,6 +32,19 @@ $(document).ready(function() {
         }
       });
     }
+    function loadFollows(){
+      $.ajax({
+        async: true,
+        url: 'followInfo/',
+        type: 'GET',
+        dataType: 'json',
+        success: (data) => {
+          console.log(data);
+          $("#followers").text(data.followers);
+          $("#following").text(data.following);
+        }
+      });
+    }
 
     function loadItems(){
       $.ajax({
@@ -41,7 +54,7 @@ $(document).ready(function() {
         dataType: 'json',
         success: (data) => {
           console.log(data);
-          // if user is artist and thre are projects
+          // if user is artist and there are projects
           if ((data[data.length - 1] == true) && (data.length > 0) ){
             $('#projSection').empty();
             var projSection = $('#projSection');
@@ -126,12 +139,14 @@ $(document).ready(function() {
     loadPic();
     loadContact();
     loadItems();
-    /*
+    loadFollows();
+    
     setInterval(function(){
       // this will run after every 1 second
-      loadPic(); 
-      loadContact();
-      loadItems();
-    }, 6000);*/
+      //loadPic(); 
+      //loadContact();
+      //loadItems();
+      loadFollows();
+    }, 6000);
     
   });

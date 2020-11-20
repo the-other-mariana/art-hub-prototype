@@ -9,13 +9,16 @@ const { path2 } = require('../app');
 const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 const { type } = require('os');
+const { O_DIRECT } = require('constants');
 
 // global usage variables
 var loggedUser = "";
+var foundUser = "";
 var userType = false; // false is for companies, true is for artists
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
+var followInfo = {following: 0, followers: 0};
 var searchInput = "";
 
 // set storage engine
@@ -130,6 +133,8 @@ router.post('/register/submit-account', function(req, res, next){
       profilePic: profPath,
       email: uemail,
       mobile: umobile,
+      following: [],
+      followers: [],
       projects: []
     };
   }
@@ -141,6 +146,8 @@ router.post('/register/submit-account', function(req, res, next){
       profilePic: profPath,
       email: uemail,
       mobile: umobile,
+      following: [],
+      followers: [],
       vacancies: []
     };
   }
@@ -227,6 +234,7 @@ router.post('/login', function(req, res, next){
 
 // upload button in profile pic
 router.post('/uploadphoto', function(req, res, next){
+  var newvalues = {};
   console.log("upload...");
   upload(req, res, (err) => {
     if (err){
@@ -247,21 +255,36 @@ router.post('/uploadphoto', function(req, res, next){
         var cursor = db.collection('user-data').find();
         cursor.forEach(function(doc, err){
           if (doc.username == loggedUser){
-            exists = true;
-            userID = (doc._id).toString();
-            objectID = doc._id;
             doc.profilePic = req.file.filename;
 
             myquery = {username: loggedUser};
-            newvalues = {
-              username: doc.username, 
-              password: doc.password, 
-              usertype: doc.usertype, 
-              profilePic: req.file.filename,
-              email: doc.email,
-              mobile: doc.mobile,
-              projects: doc.projects,
-            };
+            if (doc.usertype == "artist"){
+              newvalues = {
+                username: doc.username, 
+                password: doc.password, 
+                usertype: doc.usertype, 
+                profilePic: req.file.filename,
+                email: doc.email,
+                mobile: doc.mobile,
+                following: doc.following,
+                followers: doc.followers,
+                projects: doc.projects,
+              };
+            }
+            if (doc.usertype == "company"){
+              newvalues = {
+                username: doc.username, 
+                password: doc.password, 
+                usertype: doc.usertype, 
+                profilePic: req.file.filename,
+                email: doc.email,
+                mobile: doc.mobile,
+                following: doc.following,
+                followers: doc.followers,
+                vacancies: doc.vacancies,
+              };
+            }
+            
             db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
               if (err) throw err;
               console.log("1 document updated");
@@ -302,7 +325,7 @@ router.get('/profpic', function(req, res, next) {
 });
 
 router.post('/updateInfo', function(req, res, next){
-
+  var newvalues={};
   MongoClient.connect(url, function(err, db){
     if(err != null){
       console.log("error at db connect");
@@ -312,15 +335,33 @@ router.post('/updateInfo', function(req, res, next){
       if (doc.username == loggedUser){
         
         myquery = {username: loggedUser};
-        newvalues = {
-          username: doc.username, 
-          password: doc.password, 
-          usertype: doc.usertype, 
-          profilePic: doc.profilePic, 
-          email: req.body.upemail, 
-          mobile: req.body.upmobile,
-          projects: doc.projects
-        };
+        if (doc.usertype == "artist"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: req.body.upemail, 
+            mobile: req.body.upmobile,
+            following: doc.following,
+            followers: doc.followers,
+            projects: doc.projects
+          };
+        }
+        if (doc.usertype == "company"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: req.body.upemail, 
+            mobile: req.body.upmobile,
+            following: doc.following,
+            followers: doc.followers,
+            vacancies: doc.vacancies
+          };
+        }
+        
         db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
           if (err) throw err;
           console.log("1 document updated");
@@ -396,6 +437,8 @@ router.post('/newProject', function(req, res, next){
               profilePic: doc.profilePic,
               email: doc.email,
               mobile: doc.mobile,
+              following: doc.following,
+              followers: doc.followers,
               projects: cprojects,
             };
             db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
@@ -484,6 +527,8 @@ router.post('/editProject', function(req, res, next){
               profilePic: doc.profilePic,
               email: doc.email,
               mobile: doc.mobile,
+              following: doc.following,
+              followers: doc.followers,
               projects: cprojects,
             };
             db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
@@ -524,6 +569,7 @@ router.get('/loadSearchResults', function(req, res, next) {
 
       if ((doc.username == searchInput) || (doc.username).includes(searchInput) || (doc.username).toLowerCase() == searchInput || ((doc.username).toLowerCase()).includes((searchInput).toLowerCase())){
         rusername = doc.username;
+        foundUser = doc.username;
         rpic = doc.profilePic;
         remail = doc.email;
         rmobile = doc.mobile;
@@ -533,6 +579,154 @@ router.get('/loadSearchResults', function(req, res, next) {
     }, function(){
       db.close();
       res.send(cresults);
+      
+    });
+  });
+
+});
+
+router.post('/seeUser', function(req, res, next){
+  console.log("see user requested...")
+  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: userType, founduser: foundUser});
+  req.session.errors = null;
+
+});
+
+router.get('/searchProfileInfo', function(req, res, next) {
+  // mongo db get data
+  var cresult = [];
+
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+
+      if (doc.username == foundUser){
+        cresult = doc;
+      }
+    }, function(){
+      db.close();
+      res.send(cresult);
+      
+    });
+  });
+
+});
+
+router.post('/updatefollow', function(req, res, next){
+  var upfollowing = [];
+  var upfollowers = [];
+  var newvalues = {};
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        
+        upfollowing = doc.following;
+        upfollowing.push(foundUser);
+
+        myquery = {username: loggedUser};
+
+        if (doc.usertype == "artist"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: doc.email, 
+            mobile: doc.mobile,
+            following: upfollowing,
+            followers: doc.followers,
+            projects: doc.projects
+          };
+        }
+        if (doc.usertype == "company"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: doc.email, 
+            mobile: doc.mobile,
+            following: upfollowing,
+            followers: doc.followers,
+            vacancies: doc.vacancies
+          };
+        }
+        
+        db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");
+        });
+      }
+      if (doc.username == foundUser){
+        
+        upfollowers = doc.followers;
+        upfollowers.push(loggedUser);
+
+        myquery = {username: foundUser};
+
+        if(doc.usertype == "artist"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: doc.email, 
+            mobile: doc.mobile,
+            following: doc.following,
+            followers: upfollowers,
+            projects: doc.projects
+          };
+        }
+        if(doc.usertype == "company"){
+          newvalues = {
+            username: doc.username, 
+            password: doc.password, 
+            usertype: doc.usertype, 
+            profilePic: doc.profilePic, 
+            email: doc.email, 
+            mobile: doc.mobile,
+            following: doc.following,
+            followers: upfollowers,
+            vacancies: doc.vacancies
+          };
+        }
+        
+        db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+          if (err) throw err;
+          console.log("1 document updated");
+        });
+      }
+    }, function(){
+      db.close();
+    });
+    
+  });
+  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: userType, founduser: foundUser});
+});
+
+router.get('/followInfo', function(req, res, next) {
+  // mongo db get data
+  
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == loggedUser){
+        followInfo.followers = doc.followers.length;
+        followInfo.following = doc.following.length;
+      }
+    }, function(){
+      db.close();
+      res.send(followInfo);
       
     });
   });

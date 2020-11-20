@@ -1,0 +1,160 @@
+<section>
+    <script src="/javascripts/update-search-profile.js"></script>
+    {{# if searchusertype }}
+    <!-- ARTIST GO HERE -->
+
+    <div class="card-columns">
+
+        <div class="card text-white bg-dark w-75" width="100%">
+            <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
+
+            <div class="card-body">
+                <h5 id="user" class="card-title">{{ founduser }}</h5>
+                <small class="text-muted">
+                    Followers <span id="followers" class="badge badge-pill badge-secondary">0</span>
+                </small>
+                <small class="text-muted">
+                    Following <span id="following" class="badge badge-pill badge-secondary">0</span>
+                </small>
+            </div>
+
+            <div class="card-footer">
+                <form action="/updatefollow" method="post"> 
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Follow</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card text-center text-white bg-dark w-75">
+        <div class="card-body">
+            <h5 class="card-title">Contact</h5>
+            <p id="uemail" class="card-text"></p>
+            <p id="umobile" class="card-text"></p>
+        </div>
+        </div>
+
+        <!-- PROJECTS GO HERE -->
+        <div id="projSection">
+        
+        </div>
+
+    </div>
+    {{else}}
+    <!-- COMPANIES GO HERE -->
+
+    <div class="card-columns">
+
+        <div class="card text-white bg-dark w-75" width="100%">
+            <img id="profilePic" src="myImage-" alt="your image" height=100% width=100%>
+
+            <div class="card-body">
+                <h5 id="user" class="card-title">{{ founduser }}</h5>
+                <p class="card-text"></p>
+            </div>
+
+            <div class="card-footer">
+                <form action="/updatefollow" method="post" enctype='multipart/form-data'> 
+                <button type = "submit" class="btn btn-primary btn-block btn-outlined">Follow</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card text-center text-white bg-dark w-75">
+        <div class="card-body">
+            <h5 class="card-title">Contact</h5>
+            <p id="uemail" class="card-text"></p>
+            <p id="umobile" class="card-text"></p>
+        </div>
+        </div>
+
+        <!-- VACANCIES GO HERE -->
+        <div id="vacSection">
+        
+        </div>
+
+    </div>
+    {{/if}}
+    <!-- IMG PROJECT TEMPLATE -->
+    <div id="PicProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+            <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+            </div>
+            <div id="id" name="id" class="proj-id" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- VIDEO PROJECT TEMPLATE -->
+    <div id="VidProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+            <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" controls>
+            </video>
+            <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+            </div>
+            <div id="id" name="id" class="proj-id" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- ANIM PROJECT TEMPLATE -->
+    <div id="AnimProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+            <video class="img-fluid" src="https://mdbootstrap.com/img/video/animation-intro.mp4" playsinline autoplay loop>
+            </video>
+            <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+            </div>
+            <div id="id" name="id" class="proj-id" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- AUDIO PROJECT TEMPLATE -->
+    <div id="AudioProjTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+            <audio controls class="my-audio w-100" width=100% src=""></audio>
+            <div class="card-body">
+            
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            <div class="card-footer">
+            <button type="button" class="btn btn-secondary btn-block btn-outlined" data-toggle="modal" data-target="#EditProjectModal" onclick="identifyProject(this);">
+            Edit
+            </button>
+            </div>
+            <div id="id" name="id" class="proj-id" style="display: none;"></div>
+        </div>
+    </div>
+
+
+    <!-- VACANCY TEMPLATE -->
+    <div id="vacTemplate" style="display: none;">
+        <div class="card text-white bg-dark">
+            <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+            <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            </div>
+            
+        </div>
+    </div>
+</section>
