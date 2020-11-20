@@ -1,10 +1,30 @@
 <section>
 <script src="/javascripts/update-search.js"></script>
 
-<p>Your results for: {{ searchinput }}</p>
-<!-- SEARCH RESULTS GO HERE -->
-<div id="resultSection">
+<div class="p-3 mb-2 bg-dark text-white">
+    Your results for: "{{ searchinput }}"
+</div>
 
+<!-- SEARCH RESULTS GO HERE -->
+<div id="searchResultSection">
+
+</div>
+
+<!-- RESULT TEMPLATE -->
+<div id="searchResultTemplate" style="display: none;">
+    <div class="card text-white bg-dark mb-3">
+        <div class="card-horizontal">
+            <div class="img-square-wrapper">
+                <img class="user-img" src="http://via.placeholder.com/300x180" alt="Profile Pic" style="max-width: 250px;">
+            </div>
+            <div class="card-body">
+                <h4 class="card-title">Card title</h4>
+                <p class="info1">email@example.com</p>
+                <p class="info2">000 000 0000</p>
+                <button class="btn btn-primary">See User</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </section>

@@ -510,4 +510,32 @@ router.post('/search', function(req, res, next){
 
 });
 
+// for AJAX resource
+router.get('/loadSearchResults', function(req, res, next) {
+  // mongo db get data
+  var cresults = [];
+
+  MongoClient.connect(url, function(err, db){
+    if(err != null){
+      console.log("error at db connect");
+    }
+    var cursor = db.collection('user-data').find();
+    cursor.forEach(function(doc, err){
+      if (doc.username == searchInput){
+        rusername = doc.username;
+        rpic = doc.profilePic;
+        remail = doc.email;
+        rmobile = doc.mobile;
+
+        cresults.push({ username: rusername, profilePic: rpic, email: remail, mobile: rmobile});
+      }
+    }, function(){
+      db.close();
+      res.send(cresults);
+      
+    });
+  });
+
+});
+
 module.exports = router;
