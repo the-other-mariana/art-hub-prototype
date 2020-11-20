@@ -2,6 +2,18 @@
     <script src="/javascripts/update-search-profile.js"></script>
     {{# if searchusertype }}
     <!-- ARTIST GO HERE -->
+
+    <!-- Search form -->
+    <div class="topnav">
+    
+    <div class="search-container">
+        <form action="/search" method="post">
+        <input type="text" placeholder="Search.." id="searchinput" name="searchinput">
+        <button type="submit">Search</button>
+        </form>
+    </div>
+    </div>
+
     <div class="card-columns">
 
         <div class="card text-white bg-dark w-75" width="100%">
@@ -40,6 +52,15 @@
     </div>
     {{else}}
     <!-- COMPANIES GO HERE -->
+    <div class="topnav">
+    
+    <div class="search-container">
+        <form action="/search" method="post">
+        <input type="text" placeholder="Search.." id="searchinput" name="searchinput">
+        <button type="submit">Search</button>
+        </form>
+    </div>
+    </div>
 
     <div class="card-columns">
 
