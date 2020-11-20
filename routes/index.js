@@ -521,7 +521,8 @@ router.get('/loadSearchResults', function(req, res, next) {
     }
     var cursor = db.collection('user-data').find();
     cursor.forEach(function(doc, err){
-      if (doc.username == searchInput){
+
+      if ((doc.username == searchInput) || (doc.username).includes(searchInput) || (doc.username).toLowerCase() == searchInput || ((doc.username).toLowerCase()).includes((searchInput).toLowerCase())){
         rusername = doc.username;
         rpic = doc.profilePic;
         remail = doc.email;
