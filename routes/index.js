@@ -10,11 +10,13 @@ const url = 'mongodb://localhost:27017/arthubdb';
 const path = require('path');
 const { type } = require('os');
 
+// global usage variables
 var loggedUser = "";
 var userType = false; // false is for companies, true is for artists
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
+var searchInput = "";
 
 // set storage engine
 const storage = multer.diskStorage({
@@ -498,6 +500,14 @@ router.post('/editProject', function(req, res, next){
     }
   });
   res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
+});
+
+router.post('/search', function(req, res, next){
+
+  searchInput = req.body.searchinput;
+  res.render('search', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, usertype: userType, searchinput: searchInput});
+  req.session.errors = null;
+
 });
 
 module.exports = router;
