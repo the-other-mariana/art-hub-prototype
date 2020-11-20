@@ -21,14 +21,23 @@
         <!-- ARTIST GO HERE -->
 
         <!-- Search form -->
-        <form class="form-inline mr-auto mb-4">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary" type="submit">Search</button>
+        <div class="topnav">
+          <a class="active" href="#home">Home</a>
+          <a href="#notif">Notifications</a>
+
           <button type="button" class="btn btn-primary btn-outlined" data-toggle="modal" data-target="#projectModal" style="margin-left: 50px;">
             New Project
-          </button>
-        </form>
+            </button>
+          
+          <div class="search-container">
+            <form action="/action_page.php">
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
 
+        
         <div class="card-columns">
 
           <div class="card text-white bg-dark w-75" width="100%">
@@ -72,13 +81,21 @@
       <!-- COMPANIES GO HERE -->
 
         <!-- Search form -->
-        <form class="form-inline mr-auto mb-4">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-secondary" type="submit">Search</button>
+        <div class="topnav">
+          <a class="active" href="#home">Home</a>
+          <a href="#about">Notifications</a>
+
           <button type="button" class="btn btn-primary btn-outlined" data-toggle="modal" data-target="#projectModal" style="margin-left: 50px;">
-            New Vacancy
-          </button>
-        </form>
+            New Project
+            </button>
+          
+          <div class="search-container">
+            <form action="/action_page.php">
+              <input type="text" placeholder="Search.." name="search">
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
 
         <div class="card-columns">
 
@@ -205,6 +222,7 @@
             </div>
               <form action="/editProject" method="post" enctype='multipart/form-data'>
                 <div class="modal-body">
+                    <!-- HIDDEN LABEL FOR THE INDEX OF THE PROJECT -->
                     <input type = "text" class="form-control" id = "projID" name = "projID" style="display: none;">
 
                     <label for = "projName" style = "display: block;"> Name: </label>
