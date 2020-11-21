@@ -104,17 +104,30 @@ $(document).ready(function() {
           // if user is company and there are vacancies
           if ((data[data.length - 1] == false) && (data.length > 0) ){
             $('#vacSection').empty();
-            var projSection = $('#vacSection');
+            var vacSection = $('#vacSection');
 
             // last element contains user type
             for(var i = 0; i < data.length - 1; i++){
-              var projTemplate = $('#vacTemplate');
-              projTemplate.find('.card-title').text(data[i].title);
-              projTemplate.find('.card-text').text(data[i].description);
-              var f = '/uploads/' + data[i].media;
-              projTemplate.find('.card-img-top').attr("src", f);
-    
-              projSection.append(projTemplate.html());
+              var vacTemplate = $('#vacTemplate');
+              vacTemplate.find('.card-title').text(data[i].jobtitle);
+              vacTemplate.find('.card-text').text(data[i].description);
+              vacTemplate.find('.vac-id').text(i);
+              vacTemplate.find('.vac-id').val(i);
+
+              var f = '/uploads/' + data[i].docum;
+              vacTemplate.find('.add-doc').attr("href", f);
+
+              var cvSection = $('#applicants');
+              $('#applicants').empty();
+              for(var c = 0; c < data[i].CVs.length; c++){
+                var cvTemplate = $('#cvTemplate');
+                var f = '/uploads/' + data[i].CVs[c];
+                cvTemplate.find('.cv-class').attr("href", f);
+                cvSection.append(cvTemplate.html());
+                
+              }
+              
+              vacSection.append(vacTemplate.html());
             }
           }
 

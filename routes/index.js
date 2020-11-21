@@ -573,7 +573,14 @@ router.get('/loadSearchResults', function(req, res, next) {
       if ((doc.username == searchInput) || (doc.username).includes(searchInput) || (doc.username).toLowerCase() == searchInput || ((doc.username).toLowerCase()).includes((searchInput).toLowerCase())){
         rusername = doc.username;
         foundUser = doc.username;
-        foundUserType = doc.usertype;
+        
+        if(doc.usertype == "artist"){
+          foundUserType = true;
+        }
+        if(doc.usertype == "company"){
+          foundUserType = false;
+        }
+
         rpic = doc.profilePic;
         remail = doc.email;
         rmobile = doc.mobile;
@@ -736,6 +743,139 @@ router.get('/followInfo', function(req, res, next) {
     });
   });
 
+});
+
+router.post('/newVacancy', function(req, res, next){
+  console.log("new vacancy...");
+  var newVac = {};
+  upload(req, res, (err) => {
+    if (err){
+      req.session.upstatus = err;
+      res.render('index', {user: loggedUser, status:req.session.upstatus});
+    } else {
+      console.log(req.file);
+      req.session.upstatus = "success";
+      console.log(loggedUser);
+      
+
+      // update mongodb
+
+      MongoClient.connect(url, function(err, db){
+        if(err != null){
+          console.log("error at db connect");
+        }
+        var cursor = db.collection('user-data').find();
+        cursor.forEach(function(doc, err){
+          if (doc.username == loggedUser){
+            newVac = {
+              jobtitle: req.body.jobTitle, 
+              description: req.body.jobDescrip,
+              docum: req.file.filename,
+              CVs: []
+            };
+
+            var cvacancies = doc.vacancies
+            cvacancies.push(newVac);
+
+            myquery = {username: loggedUser};
+            newvalues = {
+              username: doc.username, 
+              password: doc.password, 
+              usertype: doc.usertype, 
+              profilePic: doc.profilePic,
+              email: doc.email,
+              mobile: doc.mobile,
+              following: doc.following,
+              followers: doc.followers,
+              vacancies: cvacancies,
+            };
+            db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+            });
+          }
+        }, function(){
+          db.close();
+        });
+        
+      });
+      
+    }
+  });
+  res.render('index', {title: 'Bohemio', success: successLog, user: loggedUser, status: req.session.upstatus, usertype: userType});
+});
+
+router.post('/uploadCV', function(req, res, next){
+  
+  var cCVs = [];
+  var cVac = [];
+  var newvalues = {};
+  var newVac = {};
+  upload(req, res, (err) => {
+    if (err){
+      req.session.upstatus = err;
+      res.render('index', {user: loggedUser, status:req.session.upstatus});
+    } else {
+      console.log(req.file);
+      req.session.upstatus = "success";
+      console.log(loggedUser);
+      
+
+      // update mongodb
+
+      MongoClient.connect(url, function(err, db){
+        if(err != null){
+          console.log("error at db connect");
+        }
+        var cursor = db.collection('user-data').find();
+        cursor.forEach(function(doc, err){
+          if (doc.username == foundUser){
+            //var v_index = parseInt(req.body.vacID);
+            var v_index = 0;
+            console.log(v_index);
+            cCVs = doc.vacancies[v_index].CVs;
+            cCVs.push((req.file.filename + ""));
+            //console.log(cCVs);
+    
+            newVac = {
+              jobtitle: doc.vacancies[v_index].jobtitle, 
+              description: doc.vacancies[v_index].description,
+              docum: doc.vacancies[v_index].docum,
+              CVs: cCVs
+            };
+    
+            cVac = doc.vacancies;
+            cVac[v_index] = newVac;
+    
+            myquery = {username: foundUser};
+            newvalues = {
+              username: doc.username, 
+              password: doc.password, 
+              usertype: doc.usertype, 
+              profilePic: doc.profilePic,
+              email: doc.email,
+              mobile: doc.mobile,
+              following: doc.following,
+              followers: doc.followers,
+              vacancies: cVac
+            };
+            
+            //console.log(newvalues.vacancies[0].CVs);
+            db.collection("user-data").updateOne(myquery, newvalues, function(err, res) {
+              if (err) throw err;
+              console.log("1 document updated");
+            });
+          }
+        }, function(){
+          db.close();
+        });
+        
+      });
+      
+    }
+  });
+  
+  res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: foundUserType, founduser: foundUser});
 });
 
 module.exports = router;

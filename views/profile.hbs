@@ -1,5 +1,10 @@
 <section>
     <script src="/javascripts/update-search-profile.js"></script>
+
+    <script>
+        
+      </script>
+
     {{# if searchusertype }}
     <!-- ARTIST GO HERE -->
 
@@ -94,7 +99,7 @@
         </div>
 
         <!-- VACANCIES GO HERE -->
-        <div id="vacSection">
+        <div id="vacancySection">
         
         </div>
 
@@ -103,7 +108,7 @@
     <!-- IMG PROJECT TEMPLATE -->
     <div id="PicProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
-            <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+            <img class="card-img-top" src="" alt="Card image cap">
             <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -157,12 +162,21 @@
 
 
     <!-- VACANCY TEMPLATE -->
-    <div id="vacTemplate" style="display: none;">
+    <div id="vacancyTemplate" style="display: none;">
         <div class="card text-white bg-dark">
-            <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+            <div class="card-header">Job Vacancy</div>
             <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="card-title"></h5>
+                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <a class="add-doc" href="" download>Added Document</a>
+                <form action="/uploadCV" method="post" enctype='multipart/form-data'>
+                    <!-- HIDDEN LABEL FOR THE INDEX OF THE VACANCY -->
+                    <input type = "text" class="vac-index" id = "vacID" name = "vacID" style="display: none;">
+                    <br/>
+                    <label for="jobDoc" class="btn btn-secondary btn-block btn-outlined">Upload Your CV</label>
+                    <input id="jobDoc" type="file" name="myImage" style="display: none"/>
+                    <button type="submit" class="btn btn-primary btn-block btn-outlined" >Apply</button>
+                </form>
             </div>
             
         </div>
