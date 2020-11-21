@@ -878,4 +878,15 @@ router.post('/uploadCV', function(req, res, next){
   res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: foundUserType, founduser: foundUser});
 });
 
+router.post('/logout', function(req, res, next){
+  
+  successLog = false;
+  loggedUser = "";
+  foundUserType = false;
+  foundUser = "";
+  req.session.errors = null;
+  res.render('index', { title: 'Bohemio', errors: null, success: false, user: "", searchusertype: false, founduser: ""});
+
+});
+
 module.exports = router;

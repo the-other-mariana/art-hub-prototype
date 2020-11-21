@@ -65,6 +65,11 @@ You can now follow any artist or company you find in searching mode and only if 
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/follow-found-user.png?raw=true) <br />
 
+A company can create a Job Vacancy, with job title, descriptions and attached document. This is seen by users and they can apply by uploading their CV. Then the company starts seeing applicants on its job offer. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/applicants.png?raw=true) <br />
+
+
 ## Helpful Links
 
 [upload files](https://www.youtube.com/watch?v=9Qzmri1WaaE&t=392s) <br />
