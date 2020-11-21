@@ -82,6 +82,8 @@ $(document).ready(function() {
 
                         vacTemplate.find('.vac-index').text(i);
                         vacTemplate.find('.vac-index').val(i);
+                        vacTemplate.find('.test').text(i);
+                        vacTemplate.find('.test').val(i);
                         console.log(i);
 
 

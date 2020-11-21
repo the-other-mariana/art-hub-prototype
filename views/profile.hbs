@@ -2,7 +2,22 @@
     <script src="/javascripts/update-search-profile.js"></script>
 
     <script>
-        
+        function identifyVac(elem){
+            console.log("IDDDDD");
+          vac = (elem.parentNode).childNodes[3].textContent;
+          childs = (elem.parentNode).children;
+            
+            for(var i = 0; i < childs.length; i++){
+                var e = childs[i];
+                console.log(e.tagName);
+                if (e.tagName == "INPUT"){
+                    e.value = vac;
+                    break;
+                }
+            }
+            
+          
+        }
       </script>
 
     {{# if searchusertype }}
@@ -183,10 +198,11 @@
                 <a class="add-doc" href="" download>Added Document</a>
                 <form action="/uploadCV" method="post" enctype='multipart/form-data'>
                     <!-- HIDDEN LABEL FOR THE INDEX OF THE VACANCY -->
+                    <div class="test" name="testname" style="display: none;"></div>
                     <input type = "text" class="vac-index" id = "vacID" name = "vacID" style="display: none;">
                     <br/>
-                    <label for="jobDoc" class="btn btn-secondary btn-block btn-outlined">Upload Your CV</label>
-                    <input id="jobDoc" type="file" name="myImage" style="display: none"/>
+                    <label for="jobDoc" class="btn btn-secondary btn-block btn-outlined" onclick="identifyVac(this);">Upload Your CV</label>
+                    <input id="jobDoc" type="file" name="myImage" style="display: none;"/>
                     <button type="submit" class="btn btn-primary btn-block btn-outlined" >Apply</button>
                 </form>
             </div>

@@ -818,7 +818,6 @@ router.post('/uploadCV', function(req, res, next){
     } else {
       console.log(req.file);
       req.session.upstatus = "success";
-      console.log(loggedUser);
       
 
       // update mongodb
@@ -830,12 +829,13 @@ router.post('/uploadCV', function(req, res, next){
         var cursor = db.collection('user-data').find();
         cursor.forEach(function(doc, err){
           if (doc.username == foundUser){
-            //var v_index = parseInt(req.body.vacID);
-            var v_index = 0;
-            console.log(v_index);
+            var v_index = parseInt(req.body.vacID);
+            //var v_index = 0;
+            console.log("index value " + v_index);
+            
             cCVs = doc.vacancies[v_index].CVs;
             cCVs.push((req.file.filename + ""));
-            //console.log(cCVs);
+
     
             newVac = {
               jobtitle: doc.vacancies[v_index].jobtitle, 
