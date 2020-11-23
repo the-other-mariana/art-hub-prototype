@@ -71,11 +71,11 @@ A company can create a Job Vacancy, with job title, descriptions and attached do
 
 And therefore, users can apply and send their CV. <br />
 
-![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/applicants-02.png?raw=true) <br />
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/apply.png?raw=true) <br /> <br />
 
 This is seen by users when they search the company profile, and they can apply by uploading their CV. Then the company starts seeing applicants on its job offer.
 
-![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/apply.png?raw=true) <br />
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/applicants-02.png?raw=true) <br />
 
 A profile of an artist then looks as follows. <br />
 
@@ -84,6 +84,8 @@ A profile of an artist then looks as follows. <br />
 Finally, a logo was added. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/logo.png?raw=true) <br />
+
+<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/Bohemio-demo.mp4" controls>Video Here</video>
 
 
 ## Helpful Links
