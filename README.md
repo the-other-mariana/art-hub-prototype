@@ -71,7 +71,7 @@ A company can create a Job Vacancy, with job title, descriptions and attached do
 
 And therefore, users can apply and send their CV. <br />
 
-![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/applicants.png?raw=true) <br />
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/applicants-02.png?raw=true) <br />
 
 This is seen by users when they search the company profile, and they can apply by uploading their CV. Then the company starts seeing applicants on its job offer.
 
