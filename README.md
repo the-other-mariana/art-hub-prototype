@@ -81,6 +81,10 @@ A profile of an artist then looks as follows. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/current-profile.png?raw=true) <br />
 
+Finally, a logo was added. <br />
+
+![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/logo.png?raw=true) <br />
+
 
 ## Helpful Links
 
