@@ -85,8 +85,13 @@ Finally, a logo was added. <br />
 
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/logo.png?raw=true) <br />
 
-<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/Bohemio-demo.mp4" controls>Video Here</video>
+## Demo Output
 
+<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.mp4" controls>Video Here</video>
+
+<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-02.mp4" controls>Video Here</video>
+
+<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-03.mp4" controls>Video Here</video>
 
 ## Helpful Links
 
