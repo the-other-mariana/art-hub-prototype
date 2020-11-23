@@ -121,14 +121,10 @@ $(document).ready(function() {
               $('#applicants').empty();
               for(var c = 0; c < data[i].CVs.length; c++){
                 var cvTemplate = $('#cvTemplate');
-                var f = '/uploads/' + data[i].CVs[c];
-                var arr = [];
-                arr = (data[i].CVs[c].split('-'))
-                var applicant = arr[1].split('.');
-                console.log("applicant: " + arr[0]);
+                var f = '/uploads/' + data[i].CVs[c].cv;
 
                 cvTemplate.find('.cv-class').attr("href", f);
-                cvTemplate.find('.applicant-user').text(applicant[0]);
+                cvTemplate.find('.applicant-user').text(data[i].CVs[c].applicant);
                 cvSection.append(cvTemplate.html());
                 
               }
