@@ -89,7 +89,12 @@ Finally, a logo was added. <br />
 
 ### Part 1
 
-<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.mp4" controls>Video Here</video>
+[Part 1](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.png) <br />
+
+[Part 2](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-02.png) <br />
+
+[Part 3](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-03.png) <br />
+
 
 ## Helpful Links
 
