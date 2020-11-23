@@ -86,7 +86,7 @@ Finally, a logo was added. <br />
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/logo.png?raw=true) <br />
 
 ## Demo Output
-
+ hellow
 
 ## Helpful Links
 
