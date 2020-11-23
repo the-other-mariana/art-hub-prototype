@@ -87,13 +87,11 @@ Finally, a logo was added. <br />
 
 ## Demo Output
 
-### Part 1
+[Part 1](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.mp4) <br />
 
-[Part 1](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.png) <br />
+[Part 2](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-02.mp4) <br />
 
-[Part 2](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-02.png) <br />
-
-[Part 3](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-03.png) <br />
+[Part 3](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-03.mp4) <br />
 
 
 ## Helpful Links
