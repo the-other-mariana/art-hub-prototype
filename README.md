@@ -86,7 +86,10 @@ Finally, a logo was added. <br />
 ![alt text](https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/logo.png?raw=true) <br />
 
 ## Demo Output
- hellow
+
+### Part 1
+
+<video src="https://github.com/the-other-mariana/art-hub-prototype/blob/master/evidences/demo-01.mp4" controls>Video Here</video>
 
 ## Helpful Links
 
