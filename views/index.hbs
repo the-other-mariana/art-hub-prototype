@@ -217,7 +217,7 @@
                     <select class="form-control" id = "projType" name = "projType">
                         <option value="picture">Picture</option>
                         <option value="video">Video</option>
-                        <option value="animation">Animation</option>
+                        <option value="animation">Loop</option>
                         <option value="audio">Audio</option>
                     </select>
                     <br/>
@@ -263,7 +263,7 @@
                     <select class="form-control" id = "projType" name = "projType">
                         <option value="picture">Picture</option>
                         <option value="video">Video</option>
-                        <option value="animation">Animation</option>
+                        <option value="animation">Loop</option>
                         <option value="audio">Audio</option>
                     </select>
                     <br/>
@@ -285,7 +285,7 @@
       <!-- IMG PROJECT TEMPLATE -->
       <div id="PicProjTemplate" style="display: none;">
         <div class="card text-white bg-dark">
-          <img class="card-img-top" src="cover-default.png" alt="Card image cap">
+          <img class="card-img-top" src="/uploads/cover-default.png" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
@@ -420,9 +420,7 @@
       <!-- CV TEMPLATE -->
       <div id="cvTemplate" style="display: none;">
         <a class="cv-class" href="" download>Applicant</a>
-        <form action="/seeApplicantUser" method="post" style="display: inline;">
-          <button type="submit" class="btn btn-primary" ><p class="applicant-user" style="margin: 0px;">See User</p></button>
-        </form>
+        <!--<label class="btn btn-primary" ><p class="applicant-user" style="margin: 0px; dispaly: inline;">See User</p></label>-->
       </div>
 
       <script>

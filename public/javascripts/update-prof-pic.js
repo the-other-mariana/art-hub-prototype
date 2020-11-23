@@ -124,7 +124,8 @@ $(document).ready(function() {
                 var f = '/uploads/' + data[i].CVs[c].cv;
 
                 cvTemplate.find('.cv-class').attr("href", f);
-                cvTemplate.find('.applicant-user').text(data[i].CVs[c].applicant);
+                cvTemplate.find('.cv-class').text(data[i].CVs[c].applicant);
+                //cvTemplate.find('.applicant-user').text(data[i].CVs[c].applicant);
                 cvSection.append(cvTemplate.html());
                 
               }

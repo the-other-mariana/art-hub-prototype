@@ -14,10 +14,8 @@ const { O_DIRECT } = require('constants');
 // global usage variables
 var loggedUser = "";
 var foundUser = "";
-var applicantUser = "";
 var userType = false; // false is for companies, true is for artists
 var foundUserType = false;
-var applicantUserType = false;
 var successLog = false;
 var profilePic = "";
 var contactInfo = {email: "none", mobile: "0"};
@@ -882,34 +880,6 @@ router.post('/uploadCV', function(req, res, next){
   res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: foundUserType, founduser: foundUser});
 });
 
-router.post('/seeApplicantUser', function(req, res, next){
-  
-
-  MongoClient.connect(url, function(err, db){
-    if(err != null){
-      console.log("error at db connect");
-    }
-    var cursor = db.collection('user-data').find();
-    cursor.forEach(function(doc, err){
-
-      if ((doc.username == loggedUser)){
-        foundUser = doc.vacancies[v_index].CVs[v_index].applicant;
-        console.log("apply by " + foundUser);
-
-        console.log("see applicant user requested...");
-    
-        res.render('profile', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, searchusertype: true, founduser: foundUser});
-        req.session.errors = null;
-      }
-    }, function(){
-      db.close();
-      
-    });
-
-    
-  });
-});
-
 router.post('/logout', function(req, res, next){
   
   successLog = false;
@@ -918,6 +888,13 @@ router.post('/logout', function(req, res, next){
   foundUser = "";
   req.session.errors = null;
   res.render('index', { title: 'Bohemio', errors: null, success: false, user: "", searchusertype: false, founduser: ""});
+
+});
+
+router.post('/home', function(req, res, next){
+
+  res.render('index', { title: 'Bohemio', errors: req.session.errors, success: successLog, user: loggedUser, usertype: userType});
+  req.session.errors = null;
 
 });
 
