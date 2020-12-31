@@ -17,12 +17,6 @@ This a prototype of a web app that allows you to log in and upload your art port
 5. Type on Powershell: `npm start`. <br />
 6. Open a web browser and type: `localhost:8000`. <br />
 
-## Internal and External IP
-
-[ifconfig.me](http://ifconfig.me/ip) <br />
-
-Mine: 189.163.88.56 <br />
-
 ## Progress
 
 Bohemio starts like with a simple login:<br />
